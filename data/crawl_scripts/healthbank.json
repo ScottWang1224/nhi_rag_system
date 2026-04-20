@@ -1,0 +1,114 @@
+[
+  {
+    "id": "healthbank_001",
+    "question": "「健康存摺」有哪些查詢管道？",
+    "context": "電腦版：登入方式請參考首頁>使用指南＞網站導覽與說明＞登入方式。「全民健保行動快易通｜健康存摺」APP：請參考全民健保行動快易通APP查詢「健康存摺」操作說明（首頁\\健保服務\\健保與就醫紀錄查詢\\健康存摺　MyHealthBank\\健康存摺申請方式【行動版】「全民健保行動快易通｜健康存摺」APP操作步驟說明）https://www.nhi.gov.tw/ch/cp-5823-bd28c-2708-1.html。臨櫃申請：只要攜帶本人健保卡、身分證到健保署各分區業務組及聯絡辦公室，就可以臨櫃完成健保卡網路服務密碼註冊，自行下載「健康存摺」哦！詳細資訊請參考 本署官網首頁>分區資訊。只要攜帶本人健保卡、身分證到健保署各分區業務組及聯絡辦公室，就可以臨櫃完成健保卡網路服務密碼註冊，自行下載「健康存摺」哦！詳細資訊請參考 本署官網首頁>分區資訊。",
+    "source": "healthbank",
+    "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+  },
+  {
+    "id": "healthbank_002",
+    "question": "忘記密碼該怎麼辦？",
+    "context": "若忘記「健保卡網路服務註冊」密碼，可點選圖型驗證碼下方之忘記密碼超連結，進入「健保卡網路服務註冊」網站進行寄發新密碼的動作。（若忘記自然人憑證密碼，則請連至內政部憑證管理中心）。",
+    "source": "healthbank",
+    "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+  },
+  {
+    "id": "healthbank_003",
+    "question": "想更改健保卡網路服務註冊之密碼、電話或E-mail該如何操作？ ",
+    "context": "請先使用原設定密碼登入「健保卡網路服務註冊」網站，點選「健保卡註冊密碼變更」，可變更密碼；或點選「帳號資料異動」，可變更聯絡電話、行動電話及E-Mail。",
+    "source": "healthbank",
+    "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+  },
+  {
+    "id": "healthbank_004",
+    "question": "查詢「健康存摺」需要手續費嗎？",
+    "context": "不用！完全不需任何費用。",
+    "source": "healthbank",
+    "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+  },
+  {
+    "id": "healthbank_005",
+    "question": "使用「健保卡」登入，要如何進行環境安裝？",
+    "context": "手動進行「信任的網站」設定，詳細步驟請參閱:IHK_Prepare.pdf。環境檢測與安裝：請點選...(依使用瀏覽器種類，按照「健保卡網路服務註冊使用說明」步驟，完成元件安裝)。若使用企業電腦，請洽企業系統管理員確認安裝與讀取元件權限。若使用企業電腦，請確認企業網路設定可連至https://cloudicap.nhi.gov.tw，使用443埠。（可透過命令提示字元輸入「telnetcloudicap.nhi.gov.tw443」，測試TCP連結埠狀態）",
+    "source": "healthbank",
+    "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+  },
+  {
+    "id": "healthbank_006",
+    "question": "使用IE瀏覽器以「自然人憑證」登入，要如何進行環境安裝？",
+    "context": "手動進行「信任的網站」設定，詳細步驟請參閱:IHK_Prepare.pdf。環境檢測與安裝：請點選...(依使用瀏覽器種類，按照「健保卡網路服務註冊使用說明」步驟，完成元件安裝)。",
+    "source": "healthbank",
+    "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+  },
+  {
+    "id": "healthbank_007",
+    "question": "使用IE瀏覽器以「自然人憑證」登入，如何手動安裝相關設定及元件？",
+    "context": "手動進行「信任的網站」設定，詳細步驟請參閱:IHK_Prepare.pdf。IE瀏覽器自動化設定：請下載Internet_IHKSetting.zip，選取「另存新檔」至個人電腦、解壓縮、再執行程式IHK_IEATX.BAT。健保資訊網憑證元件安裝：請下載HC_Setup.msi，選取「執行」或「儲存」至個人電腦、再執行程式HC_Setup.msi。關閉所有IE瀏覽器，再開啟本網頁，即可使用「自然人憑證」登入網站。若使用企業電腦，請洽企業系統管理員確認安裝與讀取元件權限。",
+    "source": "healthbank",
+    "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+  },
+  {
+    "id": "healthbank_008",
+    "question": " 使用Firefox、Chrome、Edge、Safari7...等瀏覽器以「自然人憑證」登入，要如何進行環境安裝？ ",
+    "context": "環境檢測與安裝：請點選...。",
+    "source": "healthbank",
+    "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+  },
+  {
+    "id": "healthbank_009",
+    "question": " 使用「健康存摺」安全嗎?會不會讓我的就醫資料外流？ ",
+    "context": "由於「健康存摺」是個人的健保就醫紀錄，屬於非常隱私的資料，在提供查詢或下載時須符合《個人資料保護法》等法令規範。所以「健康存摺」從登入到資料查詢或下載都需經憑證驗證及輸入相關密碼，且對於可辨識個人的部分，亦予以遮蔽處理，以避免個資外洩，多重把關以維護個人就醫資料安全。",
+    "source": "healthbank",
+    "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+  },
+  {
+    "id": "healthbank_010",
+    "question": " 別人可以查詢我的「健康存摺」嗎？ ",
+    "context": "不能喔！查詢「健康存摺」需使用已註冊的健保卡或自然人憑證插卡認證並輸入相關密碼，多重把關以保障個人隱私。",
+    "source": "healthbank",
+    "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+  },
+  {
+    "id": "healthbank_011",
+    "question": "我可以請醫師幫我查詢我的「健康存摺」嗎？",
+    "context": "請先使用原設定密碼登入「健保卡網路服務註冊」因為「健康存摺」是屬於個人的隱私資料，應由本人親自查詢。您可以在家查詢後，將「健康存摺」列印出來或下載後存放至行動儲存裝置（如隨身碟或雲端硬碟等），於就診時出示給醫師參考。",
+    "source": "healthbank",
+    "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+  },
+  {
+    "id": "healthbank_012",
+    "question": "使用「健康存摺」對我有什麼好處？",
+    "context": "「健康存摺」將民眾個人之就醫資料還諸個人，讓您了解自己的看病歷程及過敏史等健康大小事，並可利用就醫資料事先安排就醫或預約洗牙或成人預防保健等服務，提升健康自主性，強化自我照護能力。您也可以將資料列印出來或下載後存放至行動儲存裝置，於就醫時出示「健康存摺」資料供醫師參考，讓醫師能有效地掌握您跨醫療院所的就醫狀況，進而做出正確的處置及對症下藥，提升醫療安全與效益。「健康存摺」整合跨機關健康資料庫，讓您在單一入口即能取得多元資訊，避免在不同機關的往返。「健康存摺」讓醫療院所申報費用之資料透明化，有利全民共同參與全民健保。",
+    "source": "healthbank",
+    "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+  },
+  {
+    "id": "healthbank_013",
+    "question": "為什麼都已經有健保卡了，還需要「健康存摺」？",
+    "context": "以往健保卡是用於就醫時，供醫事人員可讀取儲存於健保卡的就醫內容，包括病患最近6次的就醫及處方資料。現在有了「健康存摺」，可以查詢的資料更多也更完整，而且在家就可以看自己的就醫資料，作自己的健康管理！",
+    "source": "healthbank",
+    "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+  },
+  {
+    "id": "healthbank_014",
+    "question": "「健康存摺」可以當作診斷證明書去申請保險理賠嗎？",
+    "context": "不行哦，「健康存摺」裡的資料不是病歷，而是醫療院所向健保署申請的醫療費用資料，所以並不能作為診斷證明書。相關診斷及詳細就醫資訊仍以實際就醫之病歷及診斷證明書為準。",
+    "source": "healthbank",
+    "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+  },
+  {
+    "id": "healthbank_015",
+    "question": "我想推薦「健康存摺」給親朋好友，有相關的文宣嗎？ ",
+    "context": "請至健保署網站首頁/影音文宣，目前有製作海報、摺頁單張、動畫影片，陸續增加中，歡迎大家多多利用，將「健康存摺」推薦給身邊的親朋好友，讓更多的人知道「健康存摺」。",
+    "source": "healthbank",
+    "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+  },
+  {
+    "id": "healthbank_016",
+    "question": " 我對「健康存摺」還是有很多疑問？ ",
+    "context": "在「健康存摺」系統首頁下方，有提供電話諮詢服務，服務時間：週一至週五9:00~12:00及14:00~17:00，請您依照個人需求作查詢。或請撥打健保諮詢服務免付費專線：0800-030-598，服務時間：週一至週五8:30-12:30及13:30-17:30。還可以透過E-mail提問，只要至本署民眾意見信箱，其中業務分類請選擇「健康存摺」，收到您的來信後，我們將會盡快處理。也歡迎您提供對「健康存摺」的寶貴意見，系統將會持續作精進。",
+    "source": "healthbank",
+    "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+  }
+]

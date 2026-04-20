@@ -1,0 +1,156 @@
+[
+  {
+    "id": "referral_001",
+    "question": "民眾可以主動要求醫師開轉診單嗎?",
+    "context": "轉診應依病情由醫師專業判斷是否需要，並非民眾主動要求即可開立。",
+    "source": "referral",
+    "url": "https://www.nhi.gov.tw/ch/dl-55909-17d50fd4047448e1ba5beabc5f03676a-1.pdf"
+  },
+  {
+    "id": "referral_002",
+    "question": "轉診的醫療院所與科別如何決定?",
+    "context": "轉診院所與科別由醫師依病人病情、就醫經歷及便利性專業判斷協助病人轉診至適當院所。",
+    "source": "referral",
+    "url": "https://www.nhi.gov.tw/ch/dl-55909-17d50fd4047448e1ba5beabc5f03676a-1.pdf"
+  },
+  {
+    "id": "referral_003",
+    "question": "轉診後就留在新院所一直治療對嗎?",
+    "context": "轉診為雙向機制，病情穩定後可由醫師建議轉回原院所或其他院所繼續治療。",
+    "source": "referral",
+    "url": "https://www.nhi.gov.tw/ch/dl-55909-17d50fd4047448e1ba5beabc5f03676a-1.pdf"
+  },
+  {
+    "id": "referral_004",
+    "question": "轉診注意事項:轉出院所",
+    "context": "對符合醫療需要之保險對象，應由醫師專業判斷開立轉診單，並非依民眾要求。當院所因設備、人力或專長限制無法提供完整診療時，應建議轉診。轉診前應與民眾溝通，協助選擇適當院所與科別，並尊重醫師專業建議。轉診單需包含轉診目的、病歷摘要、院所資訊及有效期限等，且有效期限最長為90日。院所應提供轉診安排並建立雙向轉診機制。",
+    "source": "referral",
+    "url": "https://www.nhi.gov.tw/ch/dl-55906-278da61690414bd4a16b83299ff438b7-1.pdf"
+  },
+  {
+    "id": "referral_005",
+    "question": "轉診注意事項:接受轉診院所",
+    "context": "接受轉診院所應提供轉診安排並設置相關人員與設施，並保留優先名額給轉診病人。應於3日內回復初步診療情形，若住院則於出院後2週內回復病歷摘要。當病情穩定且不需繼續於該院所治療時，應建議轉回原院所或其他適當院所進行後續追蹤，並建立雙向轉診機制。",
+    "source": "referral",
+    "url": "https://www.nhi.gov.tw/ch/dl-55907-edf3d853b6bd40f5b6a3e944f40294df-1.pdf"
+  },
+  {
+    "id": "referral_006",
+    "question": "轉診注意事項:民眾",
+    "context": "轉診前應與醫師溝通，由醫師協助安排適當院所與科別，並尊重醫師專業建議。應於轉診單有效期限內依指定院所與科別就醫，並向接受轉診院所洽詢就醫安排。轉診治療後，若病情穩定且無需繼續於該院所治療，應依安排轉回原院所或其他適當院所進行後續追蹤。",
+    "source": "referral",
+    "url": "https://www.nhi.gov.tw/ch/dl-55908-aa8a488bd4a2467dba6fceebd550162e-1.pdf"
+  },
+  {
+    "id": "taxe_001",
+    "question": "要報稅了！如何查詢健保費繳費金額？",
+    "context": "申報綜合所得稅採列舉扣除額時，年度健保費與補充保險費可全額列舉扣除，不受2萬4,000元上限限制。健保費繳納金額可向投保單位或相關扣繳單位查詢外，您也可以利用下列方式查詢：1.使用自然人憑證或已註冊健保卡登入健保署網站(https://www.nhi.gov.tw)，依序點選「網路櫃檯 > 承保網路櫃檯 > 一般民眾 > 個人健保資料網路服務作業 > 保險費證明線上列印作業」查詢或下載。2.於「健保行動快易通APP」點選「健保櫃檯／證明文件」，申請寄送保費繳納證明至電子郵件。3.攜帶身分證至投保地公所或健保署各分區業務組查詢。4.於統一超商多媒體機台使用自然人憑證查詢或下載。5.於報稅期間使用自然人憑證或健保卡，透過報稅系統或國稅局據點查詢並進行申報。",
+    "source": "taxe",
+    "url": "https://www.nhi.gov.tw/ch/cp-3716-5c684-3245-1.html"
+  },
+  {
+    "id": "card_001",
+    "question": "戶政事務所通報健保署服務對象及實施日期？",
+    "context": "自104年7月1日起，民眾於戶政事務所辦理戶籍基本資料變更或申請補發身分證（含健保卡遺失）時，可同時申辦健保卡服務。另自107年起，僅限原已領有健保卡者於辦理初設戶籍登記時可併同換發健保卡；未曾領有健保卡者(如非國內出生新生兒、返國定居、未曾領卡歸化者)不適用此通報服務。",
+    "source": "health insurance card",
+    "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+  },
+  {
+    "id": "card_002",
+    "question": "如果民眾在辦理基本資料變更『當日』，已申請通報健保署及傳送照片製作健保卡時，民眾是否仍須向投保單位申報基本資料變更？",
+    "context": "有參加勞保者仍須向投保單位辦理勞保資料異動；但健保部分，民眾於戶政事務所申請並繳納健保卡工本費後，健保署會依變更資料寄送新健保卡，無須再向投保單位申報健保資料異動。",
+    "source": "health insurance card",
+    "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+  },
+  {
+    "id": "card_003",
+    "question": "在戶政事務所填寫通報健保署跨機關服務申請書後，未繳健保卡工本費是否影響資料變更？",
+    "context": "申請通報基本資料變更後，健保署仍會依申請內容完成資料變更。健保卡工本費須於14天內繳納，逾期未繳將不製發健保卡，需另向投保單位或健保署申請。14歲以下未領有身分證者因無照片，僅能申請有相片健保卡（相片待補），須繳費後透過QR Code連結至健保署「健保卡相片上傳平台」上傳照片，完成後才製發健保卡。",
+    "source": "health insurance card",
+    "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+  },
+  {
+    "id": "card_004",
+    "question": "遺失身分證及健保卡是否可在戶政事務所同時申請補發？",
+    "context": "完成申請後，民眾須於14天內持繳款單繳納健保卡工本費，始會收到掛號寄送之健保卡。14歲以下未領有身分證者因無照片，僅能申請有相片健保卡（相片待補），須繳費後透過QR Code連結至健保署「健保卡相片上傳平台」補傳相片後始製發健保卡。",
+    "source": "health insurance card",
+    "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+  },
+  {
+    "id": "card_005",
+    "question": "跨機關通報後可否修改健保卡指定郵寄地址或勾選資料？ ",
+    "context": "跨機關通報後，健保署接收資料即進行處理，無法提供資料修正功能。健保卡以掛號寄送，若未收到，可洽健保署各分區業務組查詢。",
+    "source": "health insurance card",
+    "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+  },
+  {
+    "id": "card_006",
+    "question": "是否可以只申請資料變更不換發健保卡？",
+    "context": "為確保資料一致，除新生兒出生通報外，其他跨機關通報服務須同時申請換發有照片健保卡。14歲以下未領有身分證者因無照片，僅能申請有相片健保卡（相片待補）。",
+    "source": "health insurance card",
+    "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+  },
+  {
+    "id": "card_007",
+    "question": "完成通報後多久可以收到健保卡？",
+    "context": "健保署於接收戶政通報資料後，會儘速完成基本資料變更並製發健保卡。民眾申請跨機關通報並繳納工本費後，約7個工作天可收到健保卡；未成年人因無照片，須透過QR Code連結至健保署「健保卡相片上傳平台」補傳照片後才製發。若需查詢進度，可於申請隔日透過健保署網站，使用案號及身分證字號查詢製卡進度。",
+    "source": "health insurance card",
+    "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+  },
+  {
+    "id": "card_008",
+    "question": "健保卡會寄送到哪個地址？",
+    "context": "依申請書通報服務選擇登錄之指定郵寄地址寄發健保卡。",
+    "source": "health insurance card",
+    "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+  },
+  {
+    "id": "card_009",
+    "question": "申請書填寫的Email用途為何？",
+    "context": "健保署收到民眾繳納之健保卡工本費後，會寄發收據至該E-mail。",
+    "source": "health insurance card",
+    "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+  },
+  {
+    "id": "card_010",
+    "question": "已經向戶政事務所申請基本資料變更，但未申請跨機關通報服務及製發健保卡，隔日可以補申請？",
+    "context": "可隔日補申請，只要戶政事務所受理即可。",
+    "source": "health insurance card",
+    "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+  },
+  {
+    "id": "card_011",
+    "question": "14歲以下未領有國民身分證之未成年人申請基本資料變更，能否申請跨機關通報服務及製發『有』照片健保卡？",
+    "context": "14歲以下未領有身分證者因無照片，僅能申請有相片健保卡（相片待補）；如需申請無照片健保卡，須洽健保署各分區業務組辦理。申請有相片健保卡者，需繳納工本費後透過QR Code連結至健保署「健保卡相片上傳平台」上傳照片，完成後才製發健保卡。",
+    "source": "health insurance card",
+    "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+  },
+  {
+    "id": "card_012",
+    "question": "適格申請人之定義？(未成年人辦理補發身分證、受託人)",
+    "context": "凡設籍國人皆應參加健保，健保卡申請人無年齡限制。",
+    "source": "health insurance card",
+    "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+  },
+  {
+    "id": "card_013",
+    "question": "委託他人辦理戶籍登記及基本資料變更登記，受委託人是否可代辦健保卡？",
+    "context": "依據貴司規定可代為辦理戶籍登記及基本資料變更登記之受委託人，即可代為申請健保卡。",
+    "source": "health insurance card",
+    "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+  },
+  {
+    "id": "card_014",
+    "question": "申請跨機關通報服務及製發『有』照片健保卡，照片是否有年限限制？",
+    "context": "只要戶所人員確認民眾願意使用戶役政檔存之最新照片申請，健保署即可受理使用該照片製作健保卡。",
+    "source": "health insurance card",
+    "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+  },
+  {
+    "id": "card_015",
+    "question": "各戶政事務所通報健保署「基本資料變更如姓名、國民身分證統一編號變更及出生年月日更正」及「國民身分證及健保卡同時遺失，申請補發國民身分證」流程？",
+    "context": "戶政人員輸入資料並列印申請書、繳款單及證明單後，應先由民眾確認資料並簽名，再確認資料無誤完成存檔，最後將繳款單及證明單交付民眾，以避免誤辦。",
+    "source": "health insurance card",
+    "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+  }
+]

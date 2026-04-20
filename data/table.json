@@ -1,0 +1,459 @@
+{
+  "tables": [
+    {
+      "table_id": "premium_ratio",
+      "type": "ratio",
+      "title": "各類保險對象保險費的負擔比率",
+      "source": "nhi",
+      "url": "https://www.nhi.gov.tw/ch/cp-3783-12823-3246-1.html",
+      "rows": [
+        {
+          "category": "第一類",
+          "type_name": "公務人員、公職人員",
+          "scope": "本人及眷屬",
+          "insured_percent": 30,
+          "employer_percent": 70,
+          "government_percent": 0
+        },
+        {
+          "category": "第一類",
+          "type_name": "私校教職員",
+          "scope": "本人及眷屬",
+          "insured_percent": 30,
+          "employer_percent": 35,
+          "government_percent": 35
+        },
+        {
+          "category": "第一類",
+          "type_name": "公民營事業、機構等有一定雇主的受雇者",
+          "scope": "本人及眷屬",
+          "insured_percent": 30,
+          "employer_percent": 60,
+          "government_percent": 10
+        },
+        {
+          "category": "第一類",
+          "type_name": "雇主、自營業主、專門職業及技術人員自行執業者",
+          "scope": "本人及眷屬",
+          "insured_percent": 100,
+          "employer_percent": 0,
+          "government_percent": 0
+        },
+        {
+          "category": "第二類",
+          "type_name": "職業工會會員、外僱船員",
+          "scope": "本人及眷屬",
+          "insured_percent": 60,
+          "employer_percent": 0,
+          "government_percent": 40
+        },
+        {
+          "category": "第三類",
+          "type_name": "農、漁會會員",
+          "scope": "本人及眷屬",
+          "insured_percent": 30,
+          "employer_percent": 0,
+          "government_percent": 70
+        },
+        {
+          "category": "第四類",
+          "type_name": "義務役軍人、軍校軍費生、在恤遺眷、替代役役男、矯正機關之收容人",
+          "scope": "本人",
+          "insured_percent": 0,
+          "employer_percent": 0,
+          "government_percent": 100
+        },
+        {
+          "category": "第五類",
+          "type_name": "低收入戶",
+          "scope": "本人",
+          "insured_percent": 0,
+          "employer_percent": 0,
+          "government_percent": 100
+        },
+        {
+          "category": "第六類",
+          "type_name": "榮民、榮民遺眷之家戶代表",
+          "scope": "本人",
+          "insured_percent": 0,
+          "employer_percent": 0,
+          "government_percent": 100
+        },
+        {
+          "category": "第六類",
+          "type_name": "榮民、榮民遺眷之家戶代表之眷屬",
+          "scope": "眷屬",
+          "insured_percent": 30,
+          "employer_percent": 0,
+          "government_percent": 70
+        },
+        {
+          "category": "第六類",
+          "type_name": "其他地區人口",
+          "scope": "本人及眷屬",
+          "insured_percent": 60,
+          "employer_percent": 0,
+          "government_percent": 40
+        }
+      ],
+      "field_description": {
+        "category": "保險對象類別",
+        "type_name": "對象細分類型",
+        "scope": "適用範圍（本人/眷屬）",
+        "insured_percent": "被保險人負擔比例(%)",
+        "employer_percent": "投保單位負擔比例(%)",
+        "government_percent": "政府負擔比例(%)"
+      }
+    },
+    {
+      "table_id": "premium_subsidy",
+      "type": "subsidy",
+      "title": "各級政府辦理保險對象健保費補助項目一覽表",
+      "source": "nhi",
+      "url": "https://www.nhi.gov.tw/ch/cp-3789-62c16-3246-1.html",
+      "general_rules": {
+        "auto_apply": [
+          "左列多數補助資格，保險對象不需向健保署提出申請。",
+          "由各補助單位按月提供符合補助名單，於健保費開計作業中直接扣減補助。",
+          "如應受補助而未獲補助，可能因身分資料變更或補助名單延遲送達，可向補助單位、各縣市政府社政單位、健保署或投保單位洽詢。"
+        ],
+        "manual_apply": [
+          "設籍前新住民補助需每年提出申請。",
+          "申請人須填具申請表並檢附相關證明文件，向健保署各分區業務組或聯絡辦公室提出申請。",
+          "經核定符合資格者，自申請當月起補助自付保險費。"
+        ]
+      },
+      "items": [
+        {
+          "start_ym": "8403",
+          "target": "年滿70歲以上中低收入老人",
+          "unit": "衛生福利部",
+          "coverage": "全額",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "8403",
+          "target": "極重度、重度身心障礙",
+          "unit": "衛生福利部",
+          "coverage": "全額",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "8403",
+          "target": "中度身心障礙",
+          "unit": "衛生福利部",
+          "coverage": "1/2",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "8403",
+          "target": "輕度身心障礙",
+          "unit": "各縣市政府",
+          "coverage": "1/4",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "8704",
+          "target": "蘭嶼鄉原住民",
+          "unit": "原住民族委員會",
+          "coverage": "全額",
+          "eligibility": "以第2、3類及第6類第2目地區人口身分投保者",
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "8708",
+          "target": "原住民",
+          "unit": "原住民族委員會",
+          "coverage": "全額",
+          "eligibility": "以第6類第2目地區人口身分投保，年滿55歲以上及未滿20歲者",
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "9201",
+          "target": "失業被保險人",
+          "unit": "勞工保險局",
+          "coverage": "全額",
+          "eligibility": "領取失業給付或職訓津貼者",
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "9401",
+          "target": "基隆市65歲以上老人",
+          "unit": "基隆市政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": "設籍滿三年且實際繼續設籍居住之市民",
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "9401",
+          "target": "基隆市55歲以上原住民",
+          "unit": "基隆市政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": "設籍滿三年且實際繼續設籍居住之市民",
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "9406",
+          "target": "桃園市年滿65歲至69歲中低收入老人",
+          "unit": "桃園市政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "9411",
+          "target": "臺南市年滿65歲至69歲中低收入老人",
+          "unit": "臺南市政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "9507",
+          "target": "臺南市中石化污染安南區居民及經濟部列冊員工",
+          "unit": "臺南市政府衛生局",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": "94年6月30日以前設籍顯宮、鹿耳、四草等里者及經濟部列冊員工",
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "9509",
+          "target": "臺東縣年滿65歲至69歲中低收入老人",
+          "unit": "臺東縣政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "9509",
+          "target": "新竹市年滿65歲至69歲中低收入老人",
+          "unit": "新竹市政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "9601",
+          "target": "失業被保險人失業時隨同轉出之眷屬",
+          "unit": "勞工保險局",
+          "coverage": "全額",
+          "eligibility": "限以第6類第2目地區人口身分投保，及以第1、2、3類眷屬身分投保者",
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "9601",
+          "target": "臺北市原住民",
+          "unit": "臺北市政府原住民事務委員會",
+          "coverage": "全額",
+          "eligibility": "年滿20歲至未滿55歲，設籍並實際居住臺北市6個月以上，因非自願性失業、家庭經濟突陷困境或類似特殊情況，且未請領其他機關同性質補助者；每年每人補助不超過3個月",
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "9703",
+          "target": "臺中市年滿65歲至69歲中低收入老人",
+          "unit": "臺中市政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "9703",
+          "target": "新北市年滿65歲至69歲中低收入老人",
+          "unit": "新北市政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "9709",
+          "target": "花蓮縣年滿65歲至69歲中低收入老人",
+          "unit": "花蓮縣政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "9801",
+          "target": "中低收入戶未滿18歲兒童及少年",
+          "unit": "衛生福利部",
+          "coverage": "全額",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "9801",
+          "target": "設籍前之經濟弱勢新住民",
+          "unit": "新住民發展基金（內政部）",
+          "coverage": "低收入戶補助100%；中低收入戶補助50%",
+          "eligibility": "經直轄市、縣（市）政府核定列冊符合社會救助法之低收入戶、中低收入戶之設籍前新住民",
+          "apply_mode": "manual"
+        },
+        {
+          "start_ym": "9807",
+          "target": "彰化縣年滿65歲至69歲中低收入老人",
+          "unit": "彰化縣政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": null,
+          "apply_mode": "automatic",
+          "note": "同第壹項說明內容"
+        },
+        {
+          "start_ym": "9901",
+          "target": "雲林縣年滿65歲至69歲中低收入老人",
+          "unit": "雲林縣政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "9901",
+          "target": "宜蘭縣年滿65歲至69歲中低收入老人",
+          "unit": "宜蘭縣政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "10007",
+          "target": "中低收入戶",
+          "unit": "衛生福利部",
+          "coverage": "1/2",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "10107",
+          "target": "新竹縣年滿65歲至69歲中低收入老人",
+          "unit": "新竹縣政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "10201",
+          "target": "嘉義市年滿65歲至69歲中低收入老人",
+          "unit": "嘉義市政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "10201",
+          "target": "離島地區65歲以上老人",
+          "unit": "衛生福利部",
+          "coverage": "全額",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "10203",
+          "target": "澎湖縣6歲以下幼童",
+          "unit": "澎湖縣政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "10203",
+          "target": "澎湖縣罹癌民眾",
+          "unit": "澎湖縣政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "10301",
+          "target": "清寒僑生、清寒海青僑生",
+          "unit": "僑務委員會",
+          "coverage": "1/2",
+          "eligibility": "於學校以第6類第2目地區人口身分投保者",
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "10404",
+          "target": "桃園市符合資格老人",
+          "unit": "桃園市政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": "設籍桃園市滿1年；未滿70歲符合中低收入老人生活津貼發給之老人，或年滿65歲/原住民55歲以上且最近1年綜合所得未達申報標準或稅率未達20%，且未獲政府全額補助者",
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "10501",
+          "target": "高雄市符合資格老人及部分身心障礙者",
+          "unit": "高雄市政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": "設籍高雄市滿1年；包含未滿70歲符合中低收入老人生活津貼之老人、65歲以上老人或持身心障礙手冊者且所得稅率5%或未達申報標準者，及部分中/輕度身障且65歲以上老人符合所得條件者",
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "10501",
+          "target": "臺南市年滿65歲中度及輕度身心障礙者",
+          "unit": "臺南市政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": null,
+          "apply_mode": "automatic"
+        },
+        {
+          "start_ym": "10501",
+          "target": "臺北市年滿70歲老人、年滿55歲原住民及部分65歲以上老人",
+          "unit": "臺北市政府",
+          "coverage": "最高上限至地區人口保費",
+          "eligibility": "設籍並實際居住臺北市滿1年，最近1年綜合所得未達申報標準或稅率未達20%，且未獲政府全額補助者",
+          "apply_mode": "automatic"
+        }
+      ],
+      "field_description": {
+        "start_ym": "開辦年月",
+        "target": "補助對象",
+        "unit": "補助單位",
+        "coverage": "補助比例或金額",
+        "eligibility": "適用條件",
+        "apply_mode": "申請方式（automatic自動 / manual需申請）"
+      }
+    },
+    {
+      "table_id": "student_foreign_premium",
+      "type": "premium_payment",
+      "title": "在學僑生、外籍生應繳納多少保險費，如何繳納",
+      "source": "nhi",
+      "url": "https://www.nhi.gov.tw/ch/cp-3791-61e1b-3246-1.html",
+      "standard_effective_from": "2021-01",
+      "rows": [
+        {
+          "group": "外籍生、陸生",
+          "self_pay_amount": 826,
+          "ocac_subsidy_amount": 0,
+          "mohw_subsidy_amount": 551
+        },
+        {
+          "group": "僑生（一般）",
+          "self_pay_amount": 826,
+          "ocac_subsidy_amount": 0,
+          "mohw_subsidy_amount": 551
+        },
+        {
+          "group": "僑生（符合清寒補助資格者）",
+          "self_pay_amount": 413,
+          "ocac_subsidy_amount": 413,
+          "mohw_subsidy_amount": 551
+        }
+      ],
+      "payment_method": "每學期註冊時由學校一次代收半年保險費（第一學期收9月至次年2月，第二學期收3月至8月）。",
+      "notes": [
+        "不得在學校加保之僑生，不適用本表。",
+        "健保費調整時，本表負擔保費金額隨同調整。",
+        "自113年2月1日起，持事由為「陸生就學」之入出境許可證入臺之陸生，應依法參加全民健康保險。"
+      ],
+      "field_description": {
+        "group": "對象類型",
+        "self_pay_amount": "個人自付金額",
+        "ocac_subsidy_amount": "僑委會補助金額",
+        "mohw_subsidy_amount": "衛福部補助金額"
+      }
+    }
+  ]
+}
