@@ -3,8 +3,9 @@ from pathlib import Path
 from collections import defaultdict
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-# ========= 你可以先只改這裡 =========
-DATA_PATH = Path(__file__).parent / "QA_dataset.json"
+# ====================================
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+DATA_PATH = PROJECT_ROOT / "data" / "raw_data" / "QA_dataset.json"  
 
 SHORT_THRESHOLD = 80
 SINGLE_THRESHOLD = 200
@@ -33,6 +34,12 @@ def classify_length(text_len: int) -> str:
     else:
         return "long"
 
+def clean_chunk_text(text: str) -> str:
+    text = text.strip()
+    while text.startswith(("。", "，", "；", "\n", " ")):
+        text = text[1:].lstrip()
+    return text
+
 
 def print_divider(title: str = "", width: int = 80) -> None:
     print("\n" + "=" * width)
@@ -41,7 +48,29 @@ def print_divider(title: str = "", width: int = 80) -> None:
         print("=" * width)
 
 
-def preview_long_chunks(records: list[dict], splitter: RecursiveCharacterTextSplitter) -> None:
+def split_long_record(record: dict, splitter):
+    question = record["question"].strip()
+    answer = record["context"].strip()
+
+    raw_chunks = splitter.split_text(answer)
+
+    cleaned_chunks = []
+    for chunk in raw_chunks:
+        chunk = clean_chunk_text(chunk)
+        if chunk:
+            cleaned_chunks.append(chunk)
+
+    total = len(cleaned_chunks)
+
+    chunks = []
+    for i, ans_chunk in enumerate(cleaned_chunks, start=1):
+        chunk_text = f"問題：{question}\n答案（第{i}/{total}段）：{ans_chunk}"
+        chunks.append(chunk_text)
+
+    return chunks
+
+
+def preview_long_chunks(records, splitter):
     long_records = [r for r in records if r["length_type"] == "long"]
 
     print_divider("LONG QA CHUNK PREVIEW")
@@ -56,7 +85,7 @@ def preview_long_chunks(records: list[dict], splitter: RecursiveCharacterTextSpl
         print(f"CHAR_LEN: {record['char_len']}")
         print(f"QUESTION: {record['question']}")
 
-        chunks = splitter.split_text(record["text"])
+        chunks = split_long_record(record, splitter)
         print(f"CHUNK_COUNT: {len(chunks)}")
 
         for i, chunk in enumerate(chunks, start=1):

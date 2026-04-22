@@ -107,7 +107,7 @@
   {
     "id": "healthbank_008",
     "question": " 使用Firefox、Chrome、Edge、Safari7...等瀏覽器以「自然人憑證」登入，要如何進行環境安裝？ ",
-    "context": "環境檢測與安裝：請點選...。",
+    "context": "環境檢測與安裝：請點擊使用指南-自然人憑證相關連結。",
     "source": "healthbank",
     "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
   },

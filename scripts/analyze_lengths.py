@@ -2,7 +2,8 @@ import json
 from pathlib import Path
 from statistics import mean, median
 
-DATA_PATH = Path("./QA_dataset.json")  
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+DATA_PATH = PROJECT_ROOT / "data" / "raw_data" / "QA_dataset.json"  
 
 def build_text(item: dict) -> str:
     question = item.get("question", "").strip()
