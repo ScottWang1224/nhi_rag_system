@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>健保問答助手</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <main class="chat-shell">
+      <header class="chat-header">
+        <div class="avatar">健</div>
+        <div>
+          <h1>健保問答助手</h1>
+          <p>用聊天方式查詢健保資訊，系統會回覆答案與參考資料連結。</p>
+        </div>
+      </header>
+
+      <section id="chat-room" class="chat-room" aria-live="polite">
+        <article class="message message-assistant">
+          <div class="message-meta">健保問答助手</div>
+          <div class="bubble">
+            你好，請輸入你想詢問的健保相關問題。
+          </div>
+        </article>
+      </section>
+
+      <div id="status" class="status" role="status"></div>
+
+      <form id="chat-form" class="composer">
+        <label class="sr-only" for="query">輸入問題</label>
+        <textarea
+          id="query"
+          name="query"
+          placeholder="請輸入你的問題，例如：員工眷屬人數太多保費負擔會太大嗎？"
+          rows="2"
+        ></textarea>
+        <button id="submit" type="submit">送出</button>
+      </form>
+    </main>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
