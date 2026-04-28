@@ -12,6 +12,7 @@ class AppConfig:
     project_root: Path
     vectordb_path: Path
     chunks_path: Path
+    table_path: Path
     collection_name: str
     embedding_model: str
     answer_model: str
@@ -30,6 +31,7 @@ class AppConfig:
             project_root=project_root,
             vectordb_path=project_root / "data" / "vectordb" / "chroma",
             chunks_path=project_root / "data" / "processed" / "chunks.json",
+            table_path=project_root / "data" / "table" / "table.json",
             collection_name=os.getenv("CHROMA_COLLECTION_NAME", "nhi_rag_chunks"),
             embedding_model=os.getenv("OPENAI_EMBED_MODEL", "text-embedding-3-small"),
             answer_model=os.getenv("OPENAI_CHAT_MODEL", "gpt-4.1-mini"),

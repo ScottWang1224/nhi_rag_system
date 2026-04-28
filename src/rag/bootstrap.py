@@ -3,7 +3,9 @@ from __future__ import annotations
 from pathlib import Path
 
 from rag.config import AppConfig
+from rag.router import QueryRouter
 from rag.service import RAGService
+from tablestores import TableStore
 from vectorstores import ChromaRetriever
 
 
@@ -22,8 +24,12 @@ def build_service(project_root: Path) -> tuple[AppConfig, RAGService]:
         api_key=config.openai_api_key,
         embedding_model=config.embedding_model,
     )
+    table_store = TableStore(config.table_path)
+    router = QueryRouter(table_store=table_store)
     service = RAGService(
         retriever=retriever,
+        table_store=table_store,
+        router=router,
         api_key=config.openai_api_key,
         answer_model=config.answer_model,
         top_k=config.top_k,

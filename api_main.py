@@ -48,6 +48,18 @@ def _serialize_references(result_sources) -> list[ReferenceLink]:
     return references
 
 
+def _serialize_answer_references(result_references) -> list[ReferenceLink]:
+    return [
+        ReferenceLink(
+            rank=index,
+            title=reference.title,
+            url=reference.url,
+            source=reference.source_type,
+        )
+        for index, reference in enumerate(result_references, start=1)
+    ]
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     config, service = build_service(PROJECT_ROOT)
@@ -94,5 +106,9 @@ async def chat(payload: ChatRequest, request: Request) -> ChatResponse:
     return ChatResponse(
         query=result.query,
         answer=result.answer,
-        references=_serialize_references(result.retrieved_chunks),
+        references=(
+            _serialize_answer_references(result.references)
+            if result.references
+            else _serialize_references(result.retrieved_chunks)
+        ),
     )

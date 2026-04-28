@@ -13,6 +13,14 @@ from rag import RAGService, build_service
 from vectorstores import RetrievedChunk
 
 
+def print_references(service_references) -> None:
+    print("\nReferences")
+    print("-" * 80)
+    for reference in service_references:
+        print(f"{reference.title}: {reference.url}")
+    print("-" * 80)
+
+
 def print_sources(chunks: list[RetrievedChunk]) -> None:
     print("\nSources")
     print("-" * 80)
@@ -37,7 +45,10 @@ def run_single_query(service: RAGService, query: str, *, top_k: int, show_source
     print("=" * 80)
 
     if show_sources:
-        print_sources(result.retrieved_chunks)
+        if result.retrieved_chunks:
+            print_sources(result.retrieved_chunks)
+        elif result.references:
+            print_references(result.references)
 
 
 def interactive_loop(service: RAGService, *, top_k: int, show_sources: bool) -> None:
