@@ -1,0 +1,1216 @@
+{
+  "created_at": "2026-04-30T21:30:29",
+  "config": {
+    "queries_path": "eval/queries_realistic.json",
+    "vectordb_path": "data/vectordb/chroma",
+    "collection_name": "nhi_rag_chunks",
+    "embedding_model": "text-embedding-3-small",
+    "answer_model": "gpt-4.1-mini",
+    "top_k": 3,
+    "metrics": [
+      "faithfulness",
+      "answer_relevancy",
+      "context_precision",
+      "context_recall",
+      "answer_correctness"
+    ],
+    "generate_only": false
+  },
+  "summary": {
+    "total": 20,
+    "ragas": {
+      "faithfulness": 0.9432142857142857,
+      "answer_relevancy": 0.7369748704312856,
+      "context_precision": 0.9333333332758332,
+      "context_recall": 0.9,
+      "answer_correctness": 0.6690507737125634
+    }
+  },
+  "results": [
+    {
+      "qid": "card_003",
+      "query": "我在戶政改資料了，但健保卡的錢還沒繳，這樣資料會不會沒更新？",
+      "original_query": "在戶政事務所填寫通報健保署跨機關服務申請書後，未繳健保卡工本費是否影響資料變更？",
+      "query_type": "missing_context",
+      "answer": "精簡答案：\n戶政已改資料後，健保署會依申請內容完成資料變更，未繳健保卡工本費不會影響資料更新。\n\n補充重點：\n1. 申請通報基本資料變更後，資料仍會更新，只是健保卡工本費須14天內繳納，逾期未繳則不會製發新卡。  \n2. 若未繳費，仍需另外向投保單位或健保署申請，才能取得新健保卡。  \n3. 資料變更完成後，無須再向投保單位申報健保資料異動。",
+      "ground_truth": "申請通報基本資料變更後，健保署仍會依申請內容完成資料變更。健保卡工本費須於14天內繳納，逾期未繳將不製發健保卡，需另向投保單位或健保署申請。14歲以下未領有身分證者因無照片，僅能申請有相片健保卡（相片待補），須繳費後透過QR Code連結至健保署「健保卡相片上傳平台」上傳照片，完成後才製發健保卡。",
+      "contexts": [
+        "問題：在戶政事務所填寫通報健保署跨機關服務申請書後，未繳健保卡工本費是否影響資料變更？\n答案：申請通報基本資料變更後，健保署仍會依申請內容完成資料變更。健保卡工本費須於14天內繳納，逾期未繳將不製發健保卡，需另向投保單位或健保署申請。14歲以下未領有身分證者因無照片，僅能申請有相片健保卡（相片待補），須繳費後透過QR Code連結至健保署「健保卡相片上傳平台」上傳照片，完成後才製發健保卡。",
+        "問題：如果民眾在辦理基本資料變更『當日』，已申請通報健保署及傳送照片製作健保卡時，民眾是否仍須向投保單位申報基本資料變更？\n答案：有參加勞保者仍須向投保單位辦理勞保資料異動；但健保部分，民眾於戶政事務所申請並繳納健保卡工本費後，健保署會依變更資料寄送新健保卡，無須再向投保單位申報健保資料異動。",
+        "問題：各戶政事務所通報健保署「基本資料變更如姓名、國民身分證統一編號變更及出生年月日更正」及「國民身分證及健保卡同時遺失，申請補發國民身分證」流程？\n答案：戶政人員輸入資料並列印申請書、繳款單及證明單後，應先由民眾確認資料並簽名，再確認資料無誤完成存檔，最後將繳款單及證明單交付民眾，以避免誤辦。"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "doc_id": "card_003",
+          "chunk_id": "",
+          "source": "health insurance card",
+          "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf",
+          "question": "在戶政事務所填寫通報健保署跨機關服務申請書後，未繳健保卡工本費是否影響資料變更？",
+          "distance": 0.3523058295249939
+        },
+        {
+          "rank": 2,
+          "doc_id": "card_002",
+          "chunk_id": "",
+          "source": "health insurance card",
+          "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf",
+          "question": "如果民眾在辦理基本資料變更『當日』，已申請通報健保署及傳送照片製作健保卡時，民眾是否仍須向投保單位申報基本資料變更？",
+          "distance": 0.3599594235420227
+        },
+        {
+          "rank": 3,
+          "doc_id": "card_015",
+          "chunk_id": "",
+          "source": "health insurance card",
+          "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf",
+          "question": "各戶政事務所通報健保署「基本資料變更如姓名、國民身分證統一編號變更及出生年月日更正」及「國民身分證及健保卡同時遺失，申請補發國民身分證」流程？",
+          "distance": 0.3757784962654114
+        }
+      ],
+      "retrieved_tables": [],
+      "route_mode": "vector",
+      "reference": {
+        "doc_id": "card_003",
+        "source": "health insurance card",
+        "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+      },
+      "ragas_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.791811724677291,
+        "context_precision": 0.9999999999666667,
+        "context_recall": 1.0,
+        "answer_correctness": 0.8192276402226584
+      }
+    },
+    {
+      "qid": "card_006",
+      "query": "我只是想改健保資料，不想重辦卡，可以嗎？",
+      "original_query": "是否可以只申請資料變更不換發健保卡？",
+      "query_type": "casual_rewrite",
+      "answer": "精簡答案：\n除新生兒出生通報外，資料變更通常需同時申請換發有照片的健保卡，無法只變更資料不換卡。\n\n補充重點：\n1. 為確保資料一致，跨機關通報服務的資料變更需同步換發健保卡。\n2. 14歲以下未有身分證者，僅能申請有照片的健保卡（照片待補）。\n3. 新生兒出生通報是唯一例外，不需同時換卡即可變更資料。",
+      "ground_truth": "為確保資料一致，除新生兒出生通報外，其他跨機關通報服務須同時申請換發有照片健保卡。14歲以下未領有身分證者因無照片，僅能申請有相片健保卡（相片待補）。",
+      "contexts": [
+        "問題：是否可以只申請資料變更不換發健保卡？\n答案：為確保資料一致，除新生兒出生通報外，其他跨機關通報服務須同時申請換發有照片健保卡。14歲以下未領有身分證者因無照片，僅能申請有相片健保卡（相片待補）。",
+        "問題：委託他人辦理戶籍登記及基本資料變更登記，受委託人是否可代辦健保卡？\n答案：依據貴司規定可代為辦理戶籍登記及基本資料變更登記之受委託人，即可代為申請健保卡。",
+        "問題：跨機關通報後可否修改健保卡指定郵寄地址或勾選資料？\n答案：跨機關通報後，健保署接收資料即進行處理，無法提供資料修正功能。健保卡以掛號寄送，若未收到，可洽健保署各分區業務組查詢。"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "doc_id": "card_006",
+          "chunk_id": "",
+          "source": "health insurance card",
+          "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf",
+          "question": "是否可以只申請資料變更不換發健保卡？",
+          "distance": 0.3325686454772949
+        },
+        {
+          "rank": 2,
+          "doc_id": "card_013",
+          "chunk_id": "",
+          "source": "health insurance card",
+          "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf",
+          "question": "委託他人辦理戶籍登記及基本資料變更登記，受委託人是否可代辦健保卡？",
+          "distance": 0.3739529252052307
+        },
+        {
+          "rank": 3,
+          "doc_id": "card_005",
+          "chunk_id": "",
+          "source": "health insurance card",
+          "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf",
+          "question": "跨機關通報後可否修改健保卡指定郵寄地址或勾選資料？",
+          "distance": 0.374377965927124
+        }
+      ],
+      "retrieved_tables": [],
+      "route_mode": "vector",
+      "reference": {
+        "doc_id": "card_006",
+        "source": "health insurance card",
+        "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+      },
+      "ragas_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8030290188349926,
+        "context_precision": 0.8333333332916666,
+        "context_recall": 1.0,
+        "answer_correctness": 0.7423173376888275
+      }
+    },
+    {
+      "qid": "card_007",
+      "query": "戶政那邊辦完通報後，新健保卡大概要多久才會寄來？",
+      "original_query": "完成通報後多久可以收到健保卡？",
+      "query_type": "casual_rewrite",
+      "answer": "精簡答案：\n完成戶政通報並繳納健保卡工本費後，約7個工作天可收到新健保卡。\n\n補充重點：  \n1. 健保署會在接收戶政通報資料後儘速完成基本資料變更並製發健保卡。  \n2. 若是未成年人因無照片，需透過QR Code連結至健保署「健保卡相片上傳平台」補傳照片後才會製發。  \n3. 若14天內未繳工本費，將不會製發健保卡，需另行申請。",
+      "ground_truth": "健保署於接收戶政通報資料後，會儘速完成基本資料變更並製發健保卡。民眾申請跨機關通報並繳納工本費後，約7個工作天可收到健保卡；未成年人因無照片，須透過QR Code連結至健保署「健保卡相片上傳平台」補傳照片後才製發。若需查詢進度，可於申請隔日透過健保署網站，使用案號及身分證字號查詢製卡進度。",
+      "contexts": [
+        "問題：完成通報後多久可以收到健保卡？\n答案：健保署於接收戶政通報資料後，會儘速完成基本資料變更並製發健保卡。民眾申請跨機關通報並繳納工本費後，約7個工作天可收到健保卡；未成年人因無照片，須透過QR Code連結至健保署「健保卡相片上傳平台」補傳照片後才製發。若需查詢進度，可於申請隔日透過健保署網站，使用案號及身分證字號查詢製卡進度。",
+        "問題：戶政事務所通報健保署服務對象及實施日期？\n答案：自104年7月1日起，民眾於戶政事務所辦理戶籍基本資料變更或申請補發身分證（含健保卡遺失）時，可同時申辦健保卡服務。另自107年起，僅限原已領有健保卡者於辦理初設戶籍登記時可併同換發健保卡；未曾領有健保卡者(如非國內出生新生兒、返國定居、未曾領卡歸化者)不適用此通報服務。",
+        "問題：在戶政事務所填寫通報健保署跨機關服務申請書後，未繳健保卡工本費是否影響資料變更？\n答案：申請通報基本資料變更後，健保署仍會依申請內容完成資料變更。健保卡工本費須於14天內繳納，逾期未繳將不製發健保卡，需另向投保單位或健保署申請。14歲以下未領有身分證者因無照片，僅能申請有相片健保卡（相片待補），須繳費後透過QR Code連結至健保署「健保卡相片上傳平台」上傳照片，完成後才製發健保卡。"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "doc_id": "card_007",
+          "chunk_id": "",
+          "source": "health insurance card",
+          "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf",
+          "question": "完成通報後多久可以收到健保卡？",
+          "distance": 0.3025246262550354
+        },
+        {
+          "rank": 2,
+          "doc_id": "card_001",
+          "chunk_id": "",
+          "source": "health insurance card",
+          "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf",
+          "question": "戶政事務所通報健保署服務對象及實施日期？",
+          "distance": 0.37991124391555786
+        },
+        {
+          "rank": 3,
+          "doc_id": "card_003",
+          "chunk_id": "",
+          "source": "health insurance card",
+          "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf",
+          "question": "在戶政事務所填寫通報健保署跨機關服務申請書後，未繳健保卡工本費是否影響資料變更？",
+          "distance": 0.40560901165008545
+        }
+      ],
+      "retrieved_tables": [],
+      "route_mode": "vector",
+      "reference": {
+        "doc_id": "card_007",
+        "source": "health insurance card",
+        "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+      },
+      "ragas_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8281090606128148,
+        "context_precision": 0.9999999999666667,
+        "context_recall": 1.0,
+        "answer_correctness": 0.8852158036742441
+      }
+    },
+    {
+      "qid": "card_013",
+      "query": "我請別人去辦戶籍和基本資料變更，他可以順便幫我處理健保卡嗎？",
+      "original_query": "委託他人辦理戶籍登記及基本資料變更登記，受委託人是否可代辦健保卡？",
+      "query_type": "casual_rewrite",
+      "answer": "精簡答案：  \n可以的，只要您委託的人符合可代辦戶籍登記及基本資料變更的條件，他就能順便代辦健保卡。\n\n補充重點：  \n1. 依規定，受委託人若可代辦戶籍及基本資料變更，也可申請健保卡。  \n2. 自2015年7月1日起，民眾在戶政事務所辦理戶籍基本資料變更時，可同時辦理健保卡。  \n3. 辦理時需本人確認資料並簽名，確保資料正確，避免誤辦。",
+      "ground_truth": "依據貴司規定可代為辦理戶籍登記及基本資料變更登記之受委託人，即可代為申請健保卡。",
+      "contexts": [
+        "問題：委託他人辦理戶籍登記及基本資料變更登記，受委託人是否可代辦健保卡？\n答案：依據貴司規定可代為辦理戶籍登記及基本資料變更登記之受委託人，即可代為申請健保卡。",
+        "問題：各戶政事務所通報健保署「基本資料變更如姓名、國民身分證統一編號變更及出生年月日更正」及「國民身分證及健保卡同時遺失，申請補發國民身分證」流程？\n答案：戶政人員輸入資料並列印申請書、繳款單及證明單後，應先由民眾確認資料並簽名，再確認資料無誤完成存檔，最後將繳款單及證明單交付民眾，以避免誤辦。",
+        "問題：戶政事務所通報健保署服務對象及實施日期？\n答案：自104年7月1日起，民眾於戶政事務所辦理戶籍基本資料變更或申請補發身分證（含健保卡遺失）時，可同時申辦健保卡服務。另自107年起，僅限原已領有健保卡者於辦理初設戶籍登記時可併同換發健保卡；未曾領有健保卡者(如非國內出生新生兒、返國定居、未曾領卡歸化者)不適用此通報服務。"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "doc_id": "card_013",
+          "chunk_id": "",
+          "source": "health insurance card",
+          "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf",
+          "question": "委託他人辦理戶籍登記及基本資料變更登記，受委託人是否可代辦健保卡？",
+          "distance": 0.21288013458251953
+        },
+        {
+          "rank": 2,
+          "doc_id": "card_015",
+          "chunk_id": "",
+          "source": "health insurance card",
+          "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf",
+          "question": "各戶政事務所通報健保署「基本資料變更如姓名、國民身分證統一編號變更及出生年月日更正」及「國民身分證及健保卡同時遺失，申請補發國民身分證」流程？",
+          "distance": 0.3382788300514221
+        },
+        {
+          "rank": 3,
+          "doc_id": "card_001",
+          "chunk_id": "",
+          "source": "health insurance card",
+          "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf",
+          "question": "戶政事務所通報健保署服務對象及實施日期？",
+          "distance": 0.3617473840713501
+        }
+      ],
+      "retrieved_tables": [],
+      "route_mode": "vector",
+      "reference": {
+        "doc_id": "card_013",
+        "source": "health insurance card",
+        "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+      },
+      "ragas_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8463705308469341,
+        "context_precision": 0.9999999999666667,
+        "context_recall": 1.0,
+        "answer_correctness": 0.5691339050270934
+      }
+    },
+    {
+      "qid": "card_015",
+      "query": "如果改名字或身分證資料，或身分證跟健保卡一起不見，在戶政那邊要怎麼辦？",
+      "original_query": "各戶政事務所通報健保署「基本資料變更如姓名、國民身分證統一編號變更及出生年月日更正」及「國民身分證及健保卡同時遺失，申請補發國民身分證」流程？",
+      "query_type": "multi_intent",
+      "answer": "精簡答案：  \n若改名字或身分證資料，或身分證和健保卡同時遺失，可於戶政事務所辦理相關變更或補發，戶政人員會協助申請並通報健保署。\n\n補充重點：  \n1. 戶政人員會輸入資料，列印申請書、繳款單及證明單，經民眾確認簽名後完成存檔。  \n2. 申請補發後，民眾須於14天內持繳款單繳納健保卡工本費，健保卡將以掛號寄送方式送達。  \n3. 自104年7月1日起，戶政事務所辦理戶籍基本資料變更或身分證補發時可以同時辦理健保卡服務。",
+      "ground_truth": "戶政人員輸入資料並列印申請書、繳款單及證明單後，應先由民眾確認資料並簽名，再確認資料無誤完成存檔，最後將繳款單及證明單交付民眾，以避免誤辦。",
+      "contexts": [
+        "問題：各戶政事務所通報健保署「基本資料變更如姓名、國民身分證統一編號變更及出生年月日更正」及「國民身分證及健保卡同時遺失，申請補發國民身分證」流程？\n答案：戶政人員輸入資料並列印申請書、繳款單及證明單後，應先由民眾確認資料並簽名，再確認資料無誤完成存檔，最後將繳款單及證明單交付民眾，以避免誤辦。",
+        "問題：遺失身分證及健保卡是否可在戶政事務所同時申請補發？\n答案：完成申請後，民眾須於14天內持繳款單繳納健保卡工本費，始會收到掛號寄送之健保卡。14歲以下未領有身分證者因無照片，僅能申請有相片健保卡（相片待補），須繳費後透過QR Code連結至健保署「健保卡相片上傳平台」補傳相片後始製發健保卡。",
+        "問題：戶政事務所通報健保署服務對象及實施日期？\n答案：自104年7月1日起，民眾於戶政事務所辦理戶籍基本資料變更或申請補發身分證（含健保卡遺失）時，可同時申辦健保卡服務。另自107年起，僅限原已領有健保卡者於辦理初設戶籍登記時可併同換發健保卡；未曾領有健保卡者(如非國內出生新生兒、返國定居、未曾領卡歸化者)不適用此通報服務。"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "doc_id": "card_015",
+          "chunk_id": "",
+          "source": "health insurance card",
+          "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf",
+          "question": "各戶政事務所通報健保署「基本資料變更如姓名、國民身分證統一編號變更及出生年月日更正」及「國民身分證及健保卡同時遺失，申請補發國民身分證」流程？",
+          "distance": 0.2942312955856323
+        },
+        {
+          "rank": 2,
+          "doc_id": "card_004",
+          "chunk_id": "",
+          "source": "health insurance card",
+          "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf",
+          "question": "遺失身分證及健保卡是否可在戶政事務所同時申請補發？",
+          "distance": 0.3125290870666504
+        },
+        {
+          "rank": 3,
+          "doc_id": "card_001",
+          "chunk_id": "",
+          "source": "health insurance card",
+          "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf",
+          "question": "戶政事務所通報健保署服務對象及實施日期？",
+          "distance": 0.3533015251159668
+        }
+      ],
+      "retrieved_tables": [],
+      "route_mode": "vector",
+      "reference": {
+        "doc_id": "card_015",
+        "source": "health insurance card",
+        "url": "https://www.nhi.gov.tw/ch/dl-11732-1c5cab2b76884db9927e8726dff2b483-1.pdf"
+      },
+      "ragas_scores": {
+        "faithfulness": 0.8571428571428571,
+        "answer_relevancy": 0.8284948050585932,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_correctness": 0.49732268220347947
+      }
+    },
+    {
+      "qid": "healthbank_004",
+      "query": "查健康存摺要收錢嗎？",
+      "original_query": "查詢「健康存摺」需要手續費嗎？",
+      "query_type": "short_query",
+      "answer": "精簡答案：查詢健康存摺完全免費，不需要任何手續費。\n\n補充重點：\n1. 健康存摺屬於個人隱私資料，查詢時需本人使用密碼登入。\n2. 健康存摺中的資料是醫療費用資料，不能做為診斷證明文件。\n3. 使用者可以自行查詢後列印或下載，供就醫時提供醫師參考。",
+      "ground_truth": "不用！完全不需任何費用。",
+      "contexts": [
+        "問題：查詢「健康存摺」需要手續費嗎？\n答案：不用！完全不需任何費用。",
+        "問題：「健康存摺」可以當作診斷證明書去申請保險理賠嗎？\n答案：不行哦，「健康存摺」裡的資料不是病歷，而是醫療院所向健保署申請的醫療費用資料，所以並不能作為診斷證明書。相關診斷及詳細就醫資訊仍以實際就醫之病歷及診斷證明書為準。",
+        "問題：我可以請醫師幫我查詢我的「健康存摺」嗎？\n答案：請先使用原設定密碼登入「健保卡網路服務註冊」因為「健康存摺」是屬於個人的隱私資料，應由本人親自查詢。您可以在家查詢後，將「健康存摺」列印出來或下載後存放至行動儲存裝置（如隨身碟或雲端硬碟等），於就診時出示給醫師參考。"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "doc_id": "healthbank_004",
+          "chunk_id": "",
+          "source": "healthbank",
+          "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03",
+          "question": "查詢「健康存摺」需要手續費嗎？",
+          "distance": 0.30830228328704834
+        },
+        {
+          "rank": 2,
+          "doc_id": "healthbank_014",
+          "chunk_id": "",
+          "source": "healthbank",
+          "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03",
+          "question": "「健康存摺」可以當作診斷證明書去申請保險理賠嗎？",
+          "distance": 0.3969046473503113
+        },
+        {
+          "rank": 3,
+          "doc_id": "healthbank_011",
+          "chunk_id": "",
+          "source": "healthbank",
+          "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03",
+          "question": "我可以請醫師幫我查詢我的「健康存摺」嗎？",
+          "distance": 0.4208419919013977
+        }
+      ],
+      "retrieved_tables": [],
+      "route_mode": "vector",
+      "reference": {
+        "doc_id": "healthbank_004",
+        "source": "healthbank",
+        "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+      },
+      "ragas_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7843228637148721,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_correctness": 0.9554718954588809
+      }
+    },
+    {
+      "qid": "healthbank_006",
+      "query": "用 IE 跟自然人憑證登入健康存摺前，要先裝什麼東西？",
+      "original_query": "使用IE瀏覽器以「自然人憑證」登入，要如何進行環境安裝？",
+      "query_type": "casual_rewrite",
+      "answer": "精簡答案：\n使用IE瀏覽器以自然人憑證登入健康存摺前，需要手動安裝健保資訊網憑證元件並設定「信任的網站」。\n\n補充重點：\n1. 需下載並執行HC_Setup.msi檔案以安裝憑證元件。\n2. 需將健康存摺網站加入IE瀏覽器的「信任的網站」清單。\n3. 安裝後請關閉所有IE視窗重新開啟，才能使用自然人憑證登入。",
+      "ground_truth": "手動進行「信任的網站」設定，詳細步驟請參閱:IHK_Prepare.pdf。環境檢測與安裝：請點選...(依使用瀏覽器種類，按照「健保卡網路服務註冊使用說明」步驟，完成元件安裝)。",
+      "contexts": [
+        "問題：使用IE瀏覽器以「自然人憑證」登入，如何手動安裝相關設定及元件？\n答案：手動進行「信任的網站」設定，詳細步驟請參閱:IHK_Prepare.pdf。IE瀏覽器自動化設定：請下載Internet_IHKSetting.zip，選取「另存新檔」至個人電腦、解壓縮、再執行程式IHK_IEATX.BAT。健保資訊網憑證元件安裝：請下載HC_Setup.msi，選取「執行」或「儲存」至個人電腦、再執行程式HC_Setup.msi。關閉所有IE瀏覽器，再開啟本網頁，即可使用「自然人憑證」登入網站。若使用企業電腦，請洽企業系統管理員確認安裝與讀取元件權限。",
+        "問題：使用IE瀏覽器以「自然人憑證」登入，要如何進行環境安裝？\n答案：手動進行「信任的網站」設定，詳細步驟請參閱:IHK_Prepare.pdf。環境檢測與安裝：請點選...(依使用瀏覽器種類，按照「健保卡網路服務註冊使用說明」步驟，完成元件安裝)。",
+        "問題：使用Firefox、Chrome、Edge、Safari7...等瀏覽器以「自然人憑證」登入，要如何進行環境安裝？\n答案：環境檢測與安裝：請點擊使用指南-自然人憑證相關連結。"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "doc_id": "healthbank_007",
+          "chunk_id": "",
+          "source": "healthbank",
+          "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03",
+          "question": "使用IE瀏覽器以「自然人憑證」登入，如何手動安裝相關設定及元件？",
+          "distance": 0.268962562084198
+        },
+        {
+          "rank": 2,
+          "doc_id": "healthbank_006",
+          "chunk_id": "",
+          "source": "healthbank",
+          "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03",
+          "question": "使用IE瀏覽器以「自然人憑證」登入，要如何進行環境安裝？",
+          "distance": 0.275176465511322
+        },
+        {
+          "rank": 3,
+          "doc_id": "healthbank_008",
+          "chunk_id": "",
+          "source": "healthbank",
+          "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03",
+          "question": "使用Firefox、Chrome、Edge、Safari7...等瀏覽器以「自然人憑證」登入，要如何進行環境安裝？",
+          "distance": 0.3516707420349121
+        }
+      ],
+      "retrieved_tables": [],
+      "route_mode": "vector",
+      "reference": {
+        "doc_id": "healthbank_006",
+        "source": "healthbank",
+        "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+      },
+      "ragas_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8118794145601854,
+        "context_precision": 0.99999999995,
+        "context_recall": 1.0,
+        "answer_correctness": 0.6893635209186219
+      }
+    },
+    {
+      "qid": "healthbank_007",
+      "query": "IE 自然人憑證登入一直不能用，相關元件要怎麼自己安裝？",
+      "original_query": "使用IE瀏覽器以「自然人憑證」登入，如何手動安裝相關設定及元件？",
+      "query_type": "problem_statement",
+      "answer": "精簡答案：  \n若使用IE瀏覽器以自然人憑證登入不順利，可手動安裝相關憑證元件與設定，包括安裝HC_Setup.msi程式與進行「信任的網站」設定。\n\n補充重點：  \n1. 需下載並執行HC_Setup.msi安裝健保資訊網憑證元件。  \n2. 手動設定IE瀏覽器的「信任的網站」，詳細步驟可參考IHK_Prepare.pdf文件。  \n3. 安裝完畢後，關閉所有IE瀏覽器並重新開啟後即可使用自然人憑證登入。",
+      "ground_truth": "手動進行「信任的網站」設定，詳細步驟請參閱:IHK_Prepare.pdf。IE瀏覽器自動化設定：請下載Internet_IHKSetting.zip，選取「另存新檔」至個人電腦、解壓縮、再執行程式IHK_IEATX.BAT。健保資訊網憑證元件安裝：請下載HC_Setup.msi，選取「執行」或「儲存」至個人電腦、再執行程式HC_Setup.msi。關閉所有IE瀏覽器，再開啟本網頁，即可使用「自然人憑證」登入網站。若使用企業電腦，請洽企業系統管理員確認安裝與讀取元件權限。",
+      "contexts": [
+        "問題：使用IE瀏覽器以「自然人憑證」登入，如何手動安裝相關設定及元件？\n答案：手動進行「信任的網站」設定，詳細步驟請參閱:IHK_Prepare.pdf。IE瀏覽器自動化設定：請下載Internet_IHKSetting.zip，選取「另存新檔」至個人電腦、解壓縮、再執行程式IHK_IEATX.BAT。健保資訊網憑證元件安裝：請下載HC_Setup.msi，選取「執行」或「儲存」至個人電腦、再執行程式HC_Setup.msi。關閉所有IE瀏覽器，再開啟本網頁，即可使用「自然人憑證」登入網站。若使用企業電腦，請洽企業系統管理員確認安裝與讀取元件權限。",
+        "問題：使用IE瀏覽器以「自然人憑證」登入，要如何進行環境安裝？\n答案：手動進行「信任的網站」設定，詳細步驟請參閱:IHK_Prepare.pdf。環境檢測與安裝：請點選...(依使用瀏覽器種類，按照「健保卡網路服務註冊使用說明」步驟，完成元件安裝)。",
+        "問題：使用Firefox、Chrome、Edge、Safari7...等瀏覽器以「自然人憑證」登入，要如何進行環境安裝？\n答案：環境檢測與安裝：請點擊使用指南-自然人憑證相關連結。"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "doc_id": "healthbank_007",
+          "chunk_id": "",
+          "source": "healthbank",
+          "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03",
+          "question": "使用IE瀏覽器以「自然人憑證」登入，如何手動安裝相關設定及元件？",
+          "distance": 0.318090558052063
+        },
+        {
+          "rank": 2,
+          "doc_id": "healthbank_006",
+          "chunk_id": "",
+          "source": "healthbank",
+          "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03",
+          "question": "使用IE瀏覽器以「自然人憑證」登入，要如何進行環境安裝？",
+          "distance": 0.33323514461517334
+        },
+        {
+          "rank": 3,
+          "doc_id": "healthbank_008",
+          "chunk_id": "",
+          "source": "healthbank",
+          "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03",
+          "question": "使用Firefox、Chrome、Edge、Safari7...等瀏覽器以「自然人憑證」登入，要如何進行環境安裝？",
+          "distance": 0.34248679876327515
+        }
+      ],
+      "retrieved_tables": [],
+      "route_mode": "vector",
+      "reference": {
+        "doc_id": "healthbank_007",
+        "source": "healthbank",
+        "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+      },
+      "ragas_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8184823010168462,
+        "context_precision": 0.99999999995,
+        "context_recall": 1.0,
+        "answer_correctness": 0.5409073990470405
+      }
+    },
+    {
+      "qid": "healthbank_010",
+      "query": "別人有辦法看到我的健康存摺資料嗎？",
+      "original_query": "別人可以查詢我的「健康存摺」嗎？",
+      "query_type": "casual_rewrite",
+      "answer": "精簡答案：別人無法看到你的健康存摺資料，查詢需本人使用健保卡或自然人憑證認證並輸入密碼。  \n\n補充重點：  \n1. 健康存摺查詢需多重身份驗證並輸入密碼，保障個人隱私。  \n2. 個人就醫資料受到《個人資料保護法》規範，並且對可識別身份的資訊進行遮蔽。  \n3. 若需醫師了解你的健康存摺資料，應由本人先登入查詢列印或下載後提供給醫師參考。",
+      "ground_truth": "不能喔！查詢「健康存摺」需使用已註冊的健保卡或自然人憑證插卡認證並輸入相關密碼，多重把關以保障個人隱私。",
+      "contexts": [
+        "問題：別人可以查詢我的「健康存摺」嗎？\n答案：不能喔！查詢「健康存摺」需使用已註冊的健保卡或自然人憑證插卡認證並輸入相關密碼，多重把關以保障個人隱私。",
+        "問題：使用「健康存摺」安全嗎?會不會讓我的就醫資料外流？\n答案：由於「健康存摺」是個人的健保就醫紀錄，屬於非常隱私的資料，在提供查詢或下載時須符合《個人資料保護法》等法令規範。所以「健康存摺」從登入到資料查詢或下載都需經憑證驗證及輸入相關密碼，且對於可辨識個人的部分，亦予以遮蔽處理，以避免個資外洩，多重把關以維護個人就醫資料安全。",
+        "問題：我可以請醫師幫我查詢我的「健康存摺」嗎？\n答案：請先使用原設定密碼登入「健保卡網路服務註冊」因為「健康存摺」是屬於個人的隱私資料，應由本人親自查詢。您可以在家查詢後，將「健康存摺」列印出來或下載後存放至行動儲存裝置（如隨身碟或雲端硬碟等），於就診時出示給醫師參考。"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "doc_id": "healthbank_010",
+          "chunk_id": "",
+          "source": "healthbank",
+          "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03",
+          "question": "別人可以查詢我的「健康存摺」嗎？",
+          "distance": 0.19473105669021606
+        },
+        {
+          "rank": 2,
+          "doc_id": "healthbank_009",
+          "chunk_id": "",
+          "source": "healthbank",
+          "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03",
+          "question": "使用「健康存摺」安全嗎?會不會讓我的就醫資料外流？",
+          "distance": 0.27749186754226685
+        },
+        {
+          "rank": 3,
+          "doc_id": "healthbank_011",
+          "chunk_id": "",
+          "source": "healthbank",
+          "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03",
+          "question": "我可以請醫師幫我查詢我的「健康存摺」嗎？",
+          "distance": 0.31054651737213135
+        }
+      ],
+      "retrieved_tables": [],
+      "route_mode": "vector",
+      "reference": {
+        "doc_id": "healthbank_010",
+        "source": "healthbank",
+        "url": "https://myhealthbank.nhi.gov.tw/IHKE3000/IHKE3115S03"
+      },
+      "ragas_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8553307760054869,
+        "context_precision": 0.9999999999666667,
+        "context_recall": 1.0,
+        "answer_correctness": 0.6453802694143003
+      }
+    },
+    {
+      "qid": "insurance_004",
+      "query": "健保費繳費單通常每個月什麼時候會寄到？",
+      "original_query": "每個月的全民健保繳款單於何時寄出？",
+      "query_type": "casual_rewrite",
+      "answer": "精簡答案：\n資料中未明確指出健保費繳費單寄送的具體時間。\n\n補充重點：\n1. 查詢的表格資料主要提供健保費的補助項目、負擔比率與繳納方式相關資訊，未涵蓋繳費單寄送時間。\n2. 健保費補助通常由各級政府依規定按月扣減，顯示繳費作業是以月為單位進行，但未明確提及繳費通知寄出日期。\n3. 若需確切寄送時間，建議向健保署或相關單位進一步查詢。",
+      "ground_truth": "投保單位或被保險人當月應繳納之保險費，健保署會在次月底前寄發繳款單予投保單位或被保險人繳納。所以投保單位或被保險人若於月底仍未收到上月份之繳款單時，應於十五日內通知您所屬健保署各分區業務組補寄，並依補寄之繳款單限期繳款。",
+      "contexts": [
+        "table_id: premium_subsidy\ntitle: 各級政府辦理保險對象健保費補助項目一覽表\nurl: https://www.nhi.gov.tw/ch/cp-3789-62c16-3246-1.html\ngeneral_rules: {\"auto_apply\": [\"左列多數補助資格，保險對象不需向健保署提出申請。\", \"由各補助單位按月提供符合補助名單，於健保費開計作業中直接扣減補助。\", \"如應受補助而未獲補助，可能因身分資料變更或補助名單延遲送達，可向補助單位、各縣市政府社政單位、健保署或投保單位洽詢。\"], \"manual_apply\": [\"設籍前新住民補助需每年提出申請。\", \"申請人須填具申請表並檢附相關證明文件，向健保署各分區業務組或聯絡辦公室提出申請。\", \"經核定符合資格者，自申請當月起補助自付保險費。\"]}",
+        "table_id: premium_ratio\ntitle: 各類保險對象保險費的負擔比率\nurl: https://www.nhi.gov.tw/ch/cp-3783-12823-3246-1.html",
+        "table_id: student_foreign_premium\ntitle: 在學僑生、外籍生應繳納多少保險費，如何繳納\nurl: https://www.nhi.gov.tw/ch/cp-3791-61e1b-3246-1.html"
+      ],
+      "retrieved": [],
+      "retrieved_tables": [
+        {
+          "rank": 1,
+          "table_id": "premium_subsidy",
+          "title": "各級政府辦理保險對象健保費補助項目一覽表",
+          "url": "https://www.nhi.gov.tw/ch/cp-3789-62c16-3246-1.html",
+          "source": "nhi",
+          "score": 6.0,
+          "matched_rows": [],
+          "matched_fields": [],
+          "general_rules": {
+            "auto_apply": [
+              "左列多數補助資格，保險對象不需向健保署提出申請。",
+              "由各補助單位按月提供符合補助名單，於健保費開計作業中直接扣減補助。",
+              "如應受補助而未獲補助，可能因身分資料變更或補助名單延遲送達，可向補助單位、各縣市政府社政單位、健保署或投保單位洽詢。"
+            ],
+            "manual_apply": [
+              "設籍前新住民補助需每年提出申請。",
+              "申請人須填具申請表並檢附相關證明文件，向健保署各分區業務組或聯絡辦公室提出申請。",
+              "經核定符合資格者，自申請當月起補助自付保險費。"
+            ]
+          }
+        },
+        {
+          "rank": 2,
+          "table_id": "premium_ratio",
+          "title": "各類保險對象保險費的負擔比率",
+          "url": "https://www.nhi.gov.tw/ch/cp-3783-12823-3246-1.html",
+          "source": "nhi",
+          "score": 1.0,
+          "matched_rows": [],
+          "matched_fields": [],
+          "general_rules": {}
+        },
+        {
+          "rank": 3,
+          "table_id": "student_foreign_premium",
+          "title": "在學僑生、外籍生應繳納多少保險費，如何繳納",
+          "url": "https://www.nhi.gov.tw/ch/cp-3791-61e1b-3246-1.html",
+          "source": "nhi",
+          "score": 1.0,
+          "matched_rows": [],
+          "matched_fields": [],
+          "general_rules": {}
+        }
+      ],
+      "route_mode": "table",
+      "reference": {
+        "doc_id": "insurance_004",
+        "source": "insurance",
+        "url": "https://www.nhi.gov.tw/ch/cp-3786-d1076-3246-1.html"
+      },
+      "ragas_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.9999999999,
+        "context_recall": 0.5,
+        "answer_correctness": 0.47334898700873845
+      }
+    },
+    {
+      "qid": "insurance_005",
+      "query": "健保費可以怎麼繳？有哪些繳費方式？",
+      "original_query": "保險費應如何繳交？",
+      "query_type": "casual_rewrite",
+      "answer": "精簡答案：\n健保費可透過扣款、超商繳費、便利商店代收或金融機構匯款等方式繳納。\n\n補充重點：\n1. 多數補助資格不需向健保署申請，符合資格者由各單位直接扣減保險費。  \n2. 若應受補助未獲補，民眾可向補助單位、縣市社政單位、健保署或投保單位查詢。  \n3. 依「在學僑生、外籍生應繳納多少保險費，如何繳納」資料，也列有相關繳費管道與程序。",
+      "ground_truth": "(1)第一類被保險人（包括公教人員、公職人員、公民營企業之受雇者、雇主或自營業主、專門職業及技術人員自行執業者、志願役軍人）︰被保險人及其隨同加保眷屬每月應繳納保險費，由被保險人所屬之投保單位，按月自其薪資所得扣繳，並於次月底前，連同投保單位應負擔部分，一併向健保署繳納。(2)第二、三類被保險人（包括工會、農會、漁會會員）︰被保險人及其隨同加保眷屬應繳納之保險費，由被保險人向其投保單位按月繳納，再由投保單位彙繳健保署。但投保單位得徵得被保險人或會員（代表）大會同意後，一次預收三個月或六個月之保險費，並應掣發收據，及按月彙繳健保署，預收之保險費未彙繳健保署以前，應以投保單位名義設全民健康保險專戶儲存。(3)第六類被保險人（包括榮民、榮眷及地區人口）︰被保險人及其隨同加保之眷屬應繳納之保險費，由被保險人按月向健保署繳納。(4)因應時代潮流，以及體貼服務民眾，健保署自96年4月20日起，除提供金融機構臨櫃及約定轉帳的繳納方式外，增加自動櫃員機、網路ATM及便利超商的繳納方式，讓民眾可依自身的方便性擇一方式繳納健保費。",
+      "contexts": [
+        "table_id: premium_subsidy\ntitle: 各級政府辦理保險對象健保費補助項目一覽表\nurl: https://www.nhi.gov.tw/ch/cp-3789-62c16-3246-1.html\ngeneral_rules: {\"auto_apply\": [\"左列多數補助資格，保險對象不需向健保署提出申請。\", \"由各補助單位按月提供符合補助名單，於健保費開計作業中直接扣減補助。\", \"如應受補助而未獲補助，可能因身分資料變更或補助名單延遲送達，可向補助單位、各縣市政府社政單位、健保署或投保單位洽詢。\"], \"manual_apply\": [\"設籍前新住民補助需每年提出申請。\", \"申請人須填具申請表並檢附相關證明文件，向健保署各分區業務組或聯絡辦公室提出申請。\", \"經核定符合資格者，自申請當月起補助自付保險費。\"]}",
+        "table_id: premium_ratio\ntitle: 各類保險對象保險費的負擔比率\nurl: https://www.nhi.gov.tw/ch/cp-3783-12823-3246-1.html",
+        "table_id: student_foreign_premium\ntitle: 在學僑生、外籍生應繳納多少保險費，如何繳納\nurl: https://www.nhi.gov.tw/ch/cp-3791-61e1b-3246-1.html"
+      ],
+      "retrieved": [],
+      "retrieved_tables": [
+        {
+          "rank": 1,
+          "table_id": "premium_subsidy",
+          "title": "各級政府辦理保險對象健保費補助項目一覽表",
+          "url": "https://www.nhi.gov.tw/ch/cp-3789-62c16-3246-1.html",
+          "source": "nhi",
+          "score": 7.0,
+          "matched_rows": [],
+          "matched_fields": [],
+          "general_rules": {
+            "auto_apply": [
+              "左列多數補助資格，保險對象不需向健保署提出申請。",
+              "由各補助單位按月提供符合補助名單，於健保費開計作業中直接扣減補助。",
+              "如應受補助而未獲補助，可能因身分資料變更或補助名單延遲送達，可向補助單位、各縣市政府社政單位、健保署或投保單位洽詢。"
+            ],
+            "manual_apply": [
+              "設籍前新住民補助需每年提出申請。",
+              "申請人須填具申請表並檢附相關證明文件，向健保署各分區業務組或聯絡辦公室提出申請。",
+              "經核定符合資格者，自申請當月起補助自付保險費。"
+            ]
+          }
+        },
+        {
+          "rank": 2,
+          "table_id": "premium_ratio",
+          "title": "各類保險對象保險費的負擔比率",
+          "url": "https://www.nhi.gov.tw/ch/cp-3783-12823-3246-1.html",
+          "source": "nhi",
+          "score": 1.0,
+          "matched_rows": [],
+          "matched_fields": [],
+          "general_rules": {}
+        },
+        {
+          "rank": 3,
+          "table_id": "student_foreign_premium",
+          "title": "在學僑生、外籍生應繳納多少保險費，如何繳納",
+          "url": "https://www.nhi.gov.tw/ch/cp-3791-61e1b-3246-1.html",
+          "source": "nhi",
+          "score": 1.0,
+          "matched_rows": [],
+          "matched_fields": [],
+          "general_rules": {}
+        }
+      ],
+      "route_mode": "table",
+      "reference": {
+        "doc_id": "insurance_005",
+        "source": "insurance",
+        "url": "https://www.nhi.gov.tw/ch/cp-3787-5fa86-3246-1.html"
+      },
+      "ragas_scores": {
+        "faithfulness": 0.75,
+        "answer_relevancy": 0.8579877963118324,
+        "context_precision": 0.9999999999666667,
+        "context_recall": 1.0,
+        "answer_correctness": 0.9792103537422794
+      }
+    },
+    {
+      "qid": "other_002",
+      "query": "健保跟以前公保勞保農保差在哪？那些保險還會保留嗎？",
+      "original_query": "全民健康保險與現行的公、勞、農保有何不同？現行公、勞、農保將繼續存在嗎？",
+      "query_type": "casual_rewrite",
+      "answer": "精簡答案：  \n全民健康保險將原先公保、勞保、農保的醫療給付部分整合為單一制度，並適用全民；而公保、勞保、農保仍保留並繼續辦理現金給付業務。\n\n補充重點：  \n1. 公、勞、農保開辦前均包含現金與醫療給付，但眷屬保障差異存在。  \n2. 全民健康保險專門負責疾病、傷害、生育等醫療給付，適用所有國民。  \n3. 公、勞、農保的被保險人需同時參加全民健康保險，兩者功能分工不同。",
+      "ground_truth": "全民健康保險開辦前公、勞、農保均包含現金給付及醫療給付兩部分，且除公保有眷屬保險外，勞、農保只保障本人，未將眷屬納入保險。全民健康保險是將現行公、勞、農保的醫療給付部分（包括疾病、傷害、生育事故）分離出來，統合成單一的健康保險制度，適用於全民；至於公、勞、農保仍將繼續辦理現金給付業務。因此，目前公、勞、農保的被保險人，將來不但要繼續參加公、勞、農保，還要參加全民健康保險。",
+      "contexts": [
+        "問題：全民健康保險與現行的公、勞、農保有何不同？現行公、勞、農保將繼續存在嗎？\n答案：全民健康保險開辦前公、勞、農保均包含現金給付及醫療給付兩部分，且除公保有眷屬保險外，勞、農保只保障本人，未將眷屬納入保險。全民健康保險是將現行公、勞、農保的醫療給付部分（包括疾病、傷害、生育事故）分離出來，統合成單一的健康保險制度，適用於全民；至於公、勞、農保仍將繼續辦理現金給付業務。因此，目前公、勞、農保的被保險人，將來不但要繼續參加公、勞、農保，還要參加全民健康保險。",
+        "問題：保險對象有那些身分限制？\n答案（第1/3段）：1.第一類被保險人不得為第二類及第三類被保險人。2.第二類被保險人不得為第三類被保險人。3.第一類至第三類被保險人不得為第四類及第六類被保險人。4.應為第一類至第六類第一目的被保險人及眷屬者，不得為第六類第二目被保險人及眷屬。同一類具有二種以上被保險人資格者，應以其主要身分參加全民健康保險。5.農會或漁會會員身分者，應以農會或漁會會員身分參加全民健康保險。6.被保險人退休後無職業，應依附配偶或子女投保",
+        "問題：保險對象的投保資格為那些？\n答案（第1/2段）：一、具有中華民國國籍且在臺灣地區設有戶籍，並符合下列各款資格之一者，應參加健保：(一)在臺灣地區工作且為一定雇主之受僱者，自受僱之日起加保。(二)在臺灣地區辦理戶籍出生登記的新生嬰兒，自出生之日起加保。(三)最近2年沒有參加健保紀錄，或在臺灣地區初設戶籍者，均自設籍滿6個月之日起加保。(四)最近2年內曾有參加健保紀錄者，自設籍之日加保。(五)因公派駐國外之政府機關人員與其配偶及子女，自設籍之日加保"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "doc_id": "other_002",
+          "chunk_id": "",
+          "source": "other",
+          "url": "https://www.nhi.gov.tw/ch/cp-3707-8f80a-3249-1.html",
+          "question": "全民健康保險與現行的公、勞、農保有何不同？現行公、勞、農保將繼續存在嗎？",
+          "distance": 0.3299826383590698
+        },
+        {
+          "rank": 2,
+          "doc_id": "other_013",
+          "chunk_id": "",
+          "source": "other",
+          "url": "https://www.nhi.gov.tw/ch/cp-3631-6abe1-3249-1.html",
+          "question": "保險對象有那些身分限制？",
+          "distance": 0.4775928258895874
+        },
+        {
+          "rank": 3,
+          "doc_id": "other_010",
+          "chunk_id": "",
+          "source": "other",
+          "url": "https://www.nhi.gov.tw/ch/cp-3638-fc192-3249-1.html",
+          "question": "保險對象的投保資格為那些？",
+          "distance": 0.4979226589202881
+        }
+      ],
+      "retrieved_tables": [],
+      "route_mode": "vector",
+      "reference": {
+        "doc_id": "other_002",
+        "source": "other",
+        "url": "https://www.nhi.gov.tw/ch/cp-3707-8f80a-3249-1.html"
+      },
+      "ragas_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8124549205814221,
+        "context_precision": 0.9999999999666667,
+        "context_recall": 1.0,
+        "answer_correctness": 0.9930336535080663
+      }
+    },
+    {
+      "qid": "other_004",
+      "query": "加入健保後，我需要負哪些責任或義務？",
+      "original_query": "參加全民健康保險應盡什麼義務？",
+      "query_type": "casual_rewrite",
+      "answer": "精簡答案：加入健保後，您需要依身分類別參加保險並幫眷屬投保、如實提供投保資料、按月繳納保險費，並遵守分級醫療及轉診規定就醫。\n\n補充重點：\n1. 投保時須依適當身分類別辦理，眷屬可一併投保。\n2. 必須據實提供申請投保所需的資料。\n3. 按規定每月繳納保險費，並負擔部分就醫的醫療費用。",
+      "ground_truth": "1.依適當身分類別參加保險，被保險人的眷屬隨同投保。2.據實提供投保所需資料，辦理投保手續。3.按月繳納保險費。4.遵行分級醫療及轉診規定就醫，負擔部分醫療費用。",
+      "contexts": [
+        "問題：參加全民健康保險應盡什麼義務？\n答案：1.依適當身分類別參加保險，被保險人的眷屬隨同投保。2.據實提供投保所需資料，辦理投保手續。3.按月繳納保險費。4.遵行分級醫療及轉診規定就醫，負擔部分醫療費用。",
+        "問題：保險對象的投保資格為那些？\n答案（第1/2段）：一、具有中華民國國籍且在臺灣地區設有戶籍，並符合下列各款資格之一者，應參加健保：(一)在臺灣地區工作且為一定雇主之受僱者，自受僱之日起加保。(二)在臺灣地區辦理戶籍出生登記的新生嬰兒，自出生之日起加保。(三)最近2年沒有參加健保紀錄，或在臺灣地區初設戶籍者，均自設籍滿6個月之日起加保。(四)最近2年內曾有參加健保紀錄者，自設籍之日加保。(五)因公派駐國外之政府機關人員與其配偶及子女，自設籍之日加保",
+        "問題：什麼是「中斷投保」？\n答案：凡符合參加全民健康保險資格者，一律都要依規定加保。如果加保後，因轉換工作、身分變更、地址遷移---等原因，曾經有段時日未加入全民健保，也沒有繳納健保費，造成投保紀錄不銜接，即為中斷投保。"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "doc_id": "other_004",
+          "chunk_id": "",
+          "source": "other",
+          "url": "https://www.nhi.gov.tw/ch/cp-3704-c84f9-3249-1.html",
+          "question": "參加全民健康保險應盡什麼義務？",
+          "distance": 0.31713902950286865
+        },
+        {
+          "rank": 2,
+          "doc_id": "other_010",
+          "chunk_id": "",
+          "source": "other",
+          "url": "https://www.nhi.gov.tw/ch/cp-3638-fc192-3249-1.html",
+          "question": "保險對象的投保資格為那些？",
+          "distance": 0.4187171459197998
+        },
+        {
+          "rank": 3,
+          "doc_id": "other_034",
+          "chunk_id": "",
+          "source": "other",
+          "url": "https://www.nhi.gov.tw/ch/cp-3549-9e831-3249-1.html",
+          "question": "什麼是「中斷投保」？",
+          "distance": 0.449027419090271
+        }
+      ],
+      "retrieved_tables": [],
+      "route_mode": "vector",
+      "reference": {
+        "doc_id": "other_004",
+        "source": "other",
+        "url": "https://www.nhi.gov.tw/ch/cp-3704-c84f9-3249-1.html"
+      },
+      "ragas_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8332405956724621,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_correctness": 0.680048542944947
+      }
+    },
+    {
+      "qid": "other_005",
+      "query": "健保裡說的保險人是誰？",
+      "original_query": "何謂保險人？",
+      "query_type": "short_query",
+      "answer": "精簡答案：  \n健保裡的保險人是指承辦保險業務的機構，也就是負責執行保險受理、保險費計收及給付核付等工作的單位。\n\n補充重點：  \n1. 保險人又稱為承保機關。  \n2. 主要職責包括保險受理、保險費計收、保險給付核付及保險基金管理。  \n3. 也負責保險業務的推展與執行事項。",
+      "ground_truth": "保險人是指承辦保險業務的機構，或稱為承保機關；其主要職責在於專司保險受理、保險費計收、保險給付核付、保險基金運用管理，以及其他有關保險業務執行與推展等事宜。",
+      "contexts": [
+        "問題：何謂保險人？\n答案：保險人是指承辦保險業務的機構，或稱為承保機關；其主要職責在於專司保險受理、保險費計收、保險給付核付、保險基金運用管理，以及其他有關保險業務執行與推展等事宜。",
+        "問題：何謂保險對象？\n答案：全民健康保險的保險對象，指被保險人及其眷屬。凡是符合投保資格者都要參加全民健康保險。",
+        "問題：參加全民健康保險應盡什麼義務？\n答案：1.依適當身分類別參加保險，被保險人的眷屬隨同投保。2.據實提供投保所需資料，辦理投保手續。3.按月繳納保險費。4.遵行分級醫療及轉診規定就醫，負擔部分醫療費用。"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "doc_id": "other_005",
+          "chunk_id": "",
+          "source": "other",
+          "url": "https://www.nhi.gov.tw/ch/cp-3700-ef4a0-3249-1.html",
+          "question": "何謂保險人？",
+          "distance": 0.4015877842903137
+        },
+        {
+          "rank": 2,
+          "doc_id": "other_009",
+          "chunk_id": "",
+          "source": "other",
+          "url": "https://www.nhi.gov.tw/ch/cp-3671-d5a93-3249-1.html",
+          "question": "何謂保險對象？",
+          "distance": 0.4255220890045166
+        },
+        {
+          "rank": 3,
+          "doc_id": "other_004",
+          "chunk_id": "",
+          "source": "other",
+          "url": "https://www.nhi.gov.tw/ch/cp-3704-c84f9-3249-1.html",
+          "question": "參加全民健康保險應盡什麼義務？",
+          "distance": 0.4308784008026123
+        }
+      ],
+      "retrieved_tables": [],
+      "route_mode": "vector",
+      "reference": {
+        "doc_id": "other_005",
+        "source": "other",
+        "url": "https://www.nhi.gov.tw/ch/cp-3700-ef4a0-3249-1.html"
+      },
+      "ragas_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7837859320425459,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_correctness": 0.7404380542272225
+      }
+    },
+    {
+      "qid": "other_006",
+      "query": "全民健保到底是哪個單位在當保險人？",
+      "original_query": "誰是全民健康保險的保險人？",
+      "query_type": "casual_rewrite",
+      "answer": "精簡答案：  \n全民健康保險的保險人是中央健康保險署，由中央衛生主管機關設立，負責辦理保險業務。\n\n補充重點：  \n1. 中央健康保險署是專責單位，負責全民健保的保險人角色。  \n2. 全民健康保險由中央衛生主管機關設立。  \n3. 保險人負責全民健康保險相關的保險業務。",
+      "ground_truth": "全民健康保險是由中央衛生主管機關所設立的中央健康保險署為保險人，專責辦理保險業務。",
+      "contexts": [
+        "問題：誰是全民健康保險的保險人？\n答案：全民健康保險是由中央衛生主管機關所設立的中央健康保險署為保險人，專責辦理保險業務。",
+        "問題：何謂保險對象？\n答案：全民健康保險的保險對象，指被保險人及其眷屬。凡是符合投保資格者都要參加全民健康保險。",
+        "問題：參加全民健康保險應盡什麼義務？\n答案：1.依適當身分類別參加保險，被保險人的眷屬隨同投保。2.據實提供投保所需資料，辦理投保手續。3.按月繳納保險費。4.遵行分級醫療及轉診規定就醫，負擔部分醫療費用。"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "doc_id": "other_006",
+          "chunk_id": "",
+          "source": "other",
+          "url": "https://www.nhi.gov.tw/ch/cp-3698-d5542-3249-1.html",
+          "question": "誰是全民健康保險的保險人？",
+          "distance": 0.28436189889907837
+        },
+        {
+          "rank": 2,
+          "doc_id": "other_009",
+          "chunk_id": "",
+          "source": "other",
+          "url": "https://www.nhi.gov.tw/ch/cp-3671-d5a93-3249-1.html",
+          "question": "何謂保險對象？",
+          "distance": 0.3486514091491699
+        },
+        {
+          "rank": 3,
+          "doc_id": "other_004",
+          "chunk_id": "",
+          "source": "other",
+          "url": "https://www.nhi.gov.tw/ch/cp-3704-c84f9-3249-1.html",
+          "question": "參加全民健康保險應盡什麼義務？",
+          "distance": 0.3751392364501953
+        }
+      ],
+      "retrieved_tables": [],
+      "route_mode": "vector",
+      "reference": {
+        "doc_id": "other_006",
+        "source": "other",
+        "url": "https://www.nhi.gov.tw/ch/cp-3698-d5542-3249-1.html"
+      },
+      "ragas_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8231618794888816,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_correctness": 0.9900754989987108
+      }
+    },
+    {
+      "qid": "other_008",
+      "query": "我已經有公司福利或商業醫療保險了，還一定要保健保嗎？",
+      "original_query": "已參加一般商業保險或機關團體內部自辦員工免費醫療或醫療福利互助者，可否免參加全民健康保?",
+      "query_type": "missing_context",
+      "answer": "精簡答案：即使已有公司福利或商業醫療保險，仍必須依法參加全民健康保險。\n\n補充重點：  \n1. 根據規定，已參加一般商業保險或機關團體自辦的醫療福利，也無法免除參加全民健康保險的義務。  \n2. 參加全民健康保險可享有醫療服務權利，包括門診、住院及藥品給付等。  \n3. 參保人需依法繳納保險費並遵守就醫相關規定。",
+      "ground_truth": "仍應依法參加全民健康保險。",
+      "contexts": [
+        "問題：已參加一般商業保險或機關團體內部自辦員工免費醫療或醫療福利互助者，可否免參加全民健康保?\n答案：仍應依法參加全民健康保險。",
+        "問題：參加全民健康保險應盡什麼義務？\n答案：1.依適當身分類別參加保險，被保險人的眷屬隨同投保。2.據實提供投保所需資料，辦理投保手續。3.按月繳納保險費。4.遵行分級醫療及轉診規定就醫，負擔部分醫療費用。",
+        "問題：參加全民健康保險可享有什麼權利？\n答案：發生疾病、傷害、生育事故時，由保險醫事服務機構提供門診、住院及藥品等醫療服務。享有預防保健給付，包括兒童牙齒預防保健、及成人健康檢查。因情況緊急，須在非保險醫事服務機構立即就醫者，其醫療費用可依規定申請核退。"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "doc_id": "other_008",
+          "chunk_id": "",
+          "source": "other",
+          "url": "https://www.nhi.gov.tw/ch/cp-3693-6436b-3249-1.html",
+          "question": "已參加一般商業保險或機關團體內部自辦員工免費醫療或醫療福利互助者，可否免參加全民健康保?",
+          "distance": 0.41394853591918945
+        },
+        {
+          "rank": 2,
+          "doc_id": "other_004",
+          "chunk_id": "",
+          "source": "other",
+          "url": "https://www.nhi.gov.tw/ch/cp-3704-c84f9-3249-1.html",
+          "question": "參加全民健康保險應盡什麼義務？",
+          "distance": 0.4643406867980957
+        },
+        {
+          "rank": 3,
+          "doc_id": "other_003",
+          "chunk_id": "",
+          "source": "other",
+          "url": "https://www.nhi.gov.tw/ch/cp-3706-a279b-3249-1.html",
+          "question": "參加全民健康保險可享有什麼權利？",
+          "distance": 0.5040331482887268
+        }
+      ],
+      "retrieved_tables": [],
+      "route_mode": "vector",
+      "reference": {
+        "doc_id": "other_008",
+        "source": "other",
+        "url": "https://www.nhi.gov.tw/ch/cp-3693-6436b-3249-1.html"
+      },
+      "ragas_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.7717046013118805,
+        "context_precision": 0.9999999999666667,
+        "context_recall": 1.0,
+        "answer_correctness": 0.44563867635712107
+      }
+    },
+    {
+      "qid": "other_012",
+      "query": "健保眷屬可以包含哪些家人？",
+      "original_query": "被保險人的眷屬包括那些？",
+      "query_type": "casual_rewrite",
+      "answer": "精簡答案：  \n健保眷屬主要包括被保險人的配偶及二親等內直系血親卑親屬，且符合無職業等條件者。\n\n補充重點：  \n1. 被保險人二親等內直系血親卑親屬，如應屆畢業未滿一年或服兵役退伍未滿一年，得以眷屬身分參加健保。  \n2. 配偶及子女退休後無職業時，可依附配偶或子女投保。  \n3. 一人若有多位被保險人親屬，需選擇隨配偶或親等最近的被保險人投保。",
+      "ground_truth": "各類被保險人的眷屬範圍如下：第一類至第三類及第六類被保險人的眷屬：第六類被保險人屬於榮民遺眷家戶代表的眷屬：",
+      "contexts": [
+        "問題：被保險人的眷屬包括那些？\n答案：各類被保險人的眷屬範圍如下：第一類至第三類及第六類被保險人的眷屬：第六類被保險人屬於榮民遺眷家戶代表的眷屬：",
+        "問題：保險對象有那些身分限制？\n答案（第3/3段）：8.合於社會救助法規定之低收入戶成員，無論有無工作，皆得以第五類保險對象身分參加全民健康保險。9.被保險人二親等內直系血親卑親屬成年且無職業者，如係應屆畢業未滿一年或服兵役退伍未滿一年，均得以眷屬身分參加全民健康保險。",
+        "問題：保險對象有那些身分限制？\n答案（第2/3段）：6.被保險人退休後無職業，應依附配偶或子女投保。無配偶或子女可依附投保者，應以第六類第二目被保險人身分投保，但經徵得原投保單位同意，得以原投保單位為投保單位，以第六類第二目被保險人身分投保。7.具有被保險人資格者，不得以眷屬身分投保。為二位以上被保險人的眷屬者，應選擇隨配偶或親等最近的被保險人投保。但無法隨親等最近之被保險人投保並符合主管機關規定之特殊情形者，得隨負扶養義務之被保險人投保"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "doc_id": "other_012",
+          "chunk_id": "",
+          "source": "other",
+          "url": "https://www.nhi.gov.tw/ch/cp-3633-c1a3f-3249-1.html",
+          "question": "被保險人的眷屬包括那些？",
+          "distance": 0.3303680419921875
+        },
+        {
+          "rank": 2,
+          "doc_id": "other_013",
+          "chunk_id": "",
+          "source": "other",
+          "url": "https://www.nhi.gov.tw/ch/cp-3631-6abe1-3249-1.html",
+          "question": "保險對象有那些身分限制？",
+          "distance": 0.4163397550582886
+        },
+        {
+          "rank": 3,
+          "doc_id": "other_013",
+          "chunk_id": "",
+          "source": "other",
+          "url": "https://www.nhi.gov.tw/ch/cp-3631-6abe1-3249-1.html",
+          "question": "保險對象有那些身分限制？",
+          "distance": 0.44680917263031006
+        }
+      ],
+      "retrieved_tables": [],
+      "route_mode": "vector",
+      "reference": {
+        "doc_id": "other_012",
+        "source": "other",
+        "url": "https://www.nhi.gov.tw/ch/cp-3633-c1a3f-3249-1.html"
+      },
+      "ragas_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8260938596581352,
+        "context_precision": 0.9999999999,
+        "context_recall": 1.0,
+        "answer_correctness": 0.22054208852541465
+      }
+    },
+    {
+      "qid": "other_022",
+      "query": "我同時有兩份工作，健保身分要用哪一個投保？",
+      "original_query": "同時具有兩種以上工作者，應以何種身分參加健保？",
+      "query_type": "real_user_scenario",
+      "answer": "精簡答案：同時有兩份工作時，健保身分通常以其中一份工作為主要投保身分，具體規定需依投保單位及健保署指示辦理。\n\n補充重點：\n1. 目前提供的資料未明確說明雙重工作者應如何選擇健保投保身分。  \n2. 健保費補助及負擔比例等內容見於其他資料表，但未包含身分選擇規定。  \n3. 建議依實際投保單位及健保署公告的最新規定為準。",
+      "ground_truth": "如同時具有專任工作與兼職工作者，應以專任職務之工作參加全民健康保險。第二類被保險人不得為第三類被保險人，第一類至第三類被保險人不得為第四類及第六類被保險人。同一類具有二種以上被保險人資格者，應以主要工作之身分參加全民健保，主要工作之認定，應以被保險人日常實際從事有酬工作時間之長短為認定標準，如工作時間長短相同時，以收入多寡認定。",
+      "contexts": [
+        "table_id: premium_subsidy\ntitle: 各級政府辦理保險對象健保費補助項目一覽表\nurl: https://www.nhi.gov.tw/ch/cp-3789-62c16-3246-1.html\ngeneral_rules: {\"auto_apply\": [\"左列多數補助資格，保險對象不需向健保署提出申請。\", \"由各補助單位按月提供符合補助名單，於健保費開計作業中直接扣減補助。\", \"如應受補助而未獲補助，可能因身分資料變更或補助名單延遲送達，可向補助單位、各縣市政府社政單位、健保署或投保單位洽詢。\"], \"manual_apply\": [\"設籍前新住民補助需每年提出申請。\", \"申請人須填具申請表並檢附相關證明文件，向健保署各分區業務組或聯絡辦公室提出申請。\", \"經核定符合資格者，自申請當月起補助自付保險費。\"]}",
+        "table_id: premium_ratio\ntitle: 各類保險對象保險費的負擔比率\nurl: https://www.nhi.gov.tw/ch/cp-3783-12823-3246-1.html",
+        "table_id: student_foreign_premium\ntitle: 在學僑生、外籍生應繳納多少保險費，如何繳納\nurl: https://www.nhi.gov.tw/ch/cp-3791-61e1b-3246-1.html"
+      ],
+      "retrieved": [],
+      "retrieved_tables": [
+        {
+          "rank": 1,
+          "table_id": "premium_subsidy",
+          "title": "各級政府辦理保險對象健保費補助項目一覽表",
+          "url": "https://www.nhi.gov.tw/ch/cp-3789-62c16-3246-1.html",
+          "source": "nhi",
+          "score": 5.5,
+          "matched_rows": [],
+          "matched_fields": [],
+          "general_rules": {
+            "auto_apply": [
+              "左列多數補助資格，保險對象不需向健保署提出申請。",
+              "由各補助單位按月提供符合補助名單，於健保費開計作業中直接扣減補助。",
+              "如應受補助而未獲補助，可能因身分資料變更或補助名單延遲送達，可向補助單位、各縣市政府社政單位、健保署或投保單位洽詢。"
+            ],
+            "manual_apply": [
+              "設籍前新住民補助需每年提出申請。",
+              "申請人須填具申請表並檢附相關證明文件，向健保署各分區業務組或聯絡辦公室提出申請。",
+              "經核定符合資格者，自申請當月起補助自付保險費。"
+            ]
+          }
+        },
+        {
+          "rank": 2,
+          "table_id": "premium_ratio",
+          "title": "各類保險對象保險費的負擔比率",
+          "url": "https://www.nhi.gov.tw/ch/cp-3783-12823-3246-1.html",
+          "source": "nhi",
+          "score": 2.0,
+          "matched_rows": [],
+          "matched_fields": [],
+          "general_rules": {}
+        },
+        {
+          "rank": 3,
+          "table_id": "student_foreign_premium",
+          "title": "在學僑生、外籍生應繳納多少保險費，如何繳納",
+          "url": "https://www.nhi.gov.tw/ch/cp-3791-61e1b-3246-1.html",
+          "source": "nhi",
+          "score": 1.0,
+          "matched_rows": [],
+          "matched_fields": [],
+          "general_rules": {}
+        }
+      ],
+      "route_mode": "table",
+      "reference": {
+        "doc_id": "other_022",
+        "source": "other",
+        "url": "https://www.nhi.gov.tw/ch/cp-3616-fcf7d-3249-1.html"
+      },
+      "ragas_scores": {
+        "faithfulness": 0.4,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.8333333332916666,
+        "context_recall": 0.5,
+        "answer_correctness": 0.4770989427884262
+      }
+    },
+    {
+      "qid": "other_031",
+      "query": "低收入戶第五類健保成員是哪些人？",
+      "original_query": "第五類低收入戶成員包括那些？",
+      "query_type": "short_query",
+      "answer": "精簡答案：\n低收入戶第五類健保成員是指本人屬於低收入戶的保險對象。\n\n補充重點：\n1. 第五類保險對象中，低收入戶的本人健保費全由政府負擔，保險費負擔比例為政府100%。  \n2. 低收入戶身份資料由各補助單位按月提供健保署，保險費於開計作業中直接扣減補助。  \n3. 如果低收入戶未獲得應有的補助，可能因身份資料異動或補助名單延遲，應向補助單位或健保署查詢。",
+      "ground_truth": "戶長與戶長同一戶籍或共同生活的直系血親及有互負扶養義務的親屬。但戶長之直系血親卑親屬，以未婚者為限。",
+      "contexts": [
+        "table_id: premium_ratio\ntitle: 各類保險對象保險費的負擔比率\nurl: https://www.nhi.gov.tw/ch/cp-3783-12823-3246-1.html\nmatched_rows:\n- row_1: {\"category\": \"第五類\", \"type_name\": \"低收入戶\", \"scope\": \"本人\", \"insured_percent\": 0, \"employer_percent\": 0, \"government_percent\": 100}",
+        "table_id: premium_subsidy\ntitle: 各級政府辦理保險對象健保費補助項目一覽表\nurl: https://www.nhi.gov.tw/ch/cp-3789-62c16-3246-1.html\ngeneral_rules: {\"auto_apply\": [\"左列多數補助資格，保險對象不需向健保署提出申請。\", \"由各補助單位按月提供符合補助名單，於健保費開計作業中直接扣減補助。\", \"如應受補助而未獲補助，可能因身分資料變更或補助名單延遲送達，可向補助單位、各縣市政府社政單位、健保署或投保單位洽詢。\"], \"manual_apply\": [\"設籍前新住民補助需每年提出申請。\", \"申請人須填具申請表並檢附相關證明文件，向健保署各分區業務組或聯絡辦公室提出申請。\", \"經核定符合資格者，自申請當月起補助自付保險費。\"]}"
+      ],
+      "retrieved": [],
+      "retrieved_tables": [
+        {
+          "rank": 1,
+          "table_id": "premium_ratio",
+          "title": "各類保險對象保險費的負擔比率",
+          "url": "https://www.nhi.gov.tw/ch/cp-3783-12823-3246-1.html",
+          "source": "nhi",
+          "score": 11.0,
+          "matched_rows": [
+            {
+              "category": "第五類",
+              "type_name": "低收入戶",
+              "scope": "本人",
+              "insured_percent": 0,
+              "employer_percent": 0,
+              "government_percent": 100
+            }
+          ],
+          "matched_fields": [],
+          "general_rules": {}
+        },
+        {
+          "rank": 2,
+          "table_id": "premium_subsidy",
+          "title": "各級政府辦理保險對象健保費補助項目一覽表",
+          "url": "https://www.nhi.gov.tw/ch/cp-3789-62c16-3246-1.html",
+          "source": "nhi",
+          "score": 2.5,
+          "matched_rows": [],
+          "matched_fields": [],
+          "general_rules": {
+            "auto_apply": [
+              "左列多數補助資格，保險對象不需向健保署提出申請。",
+              "由各補助單位按月提供符合補助名單，於健保費開計作業中直接扣減補助。",
+              "如應受補助而未獲補助，可能因身分資料變更或補助名單延遲送達，可向補助單位、各縣市政府社政單位、健保署或投保單位洽詢。"
+            ],
+            "manual_apply": [
+              "設籍前新住民補助需每年提出申請。",
+              "申請人須填具申請表並檢附相關證明文件，向健保署各分區業務組或聯絡辦公室提出申請。",
+              "經核定符合資格者，自申請當月起補助自付保險費。"
+            ]
+          }
+        }
+      ],
+      "route_mode": "table",
+      "reference": {
+        "doc_id": "other_031",
+        "source": "other",
+        "url": "https://www.nhi.gov.tw/ch/cp-3553-961e9-3249-1.html"
+      },
+      "ragas_scores": {
+        "faithfulness": 0.8571428571428571,
+        "answer_relevancy": 0.8590612377923312,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.19819573654115402
+      }
+    },
+    {
+      "qid": "referral_005",
+      "query": "拿到轉診單後，要去接收轉診的醫院時有什麼要注意？",
+      "original_query": "轉診注意事項:接受轉診院所",
+      "query_type": "casual_rewrite",
+      "answer": "精簡答案：  \n拿到轉診單後，應於轉診單有效期限內到指定的院所及科別就醫，並在就醫前向接受轉診的院所洽詢相關就醫安排。\n\n補充重點：  \n1. 轉診院所會提供轉診安排並保留優先名額給轉診病人。  \n2. 轉診院所會在3日內回復初步診療情形，住院者出院後2週內回復病歷摘要。  \n3. 病情穩定且無需繼續治療時，應配合轉診院所建議轉回原院所或其他適當院所追蹤，雙向轉診機制得以建立。",
+      "ground_truth": "接受轉診院所應提供轉診安排並設置相關人員與設施，並保留優先名額給轉診病人。應於3日內回復初步診療情形，若住院則於出院後2週內回復病歷摘要。當病情穩定且不需繼續於該院所治療時，應建議轉回原院所或其他適當院所進行後續追蹤，並建立雙向轉診機制。",
+      "contexts": [
+        "問題：轉診注意事項:接受轉診院所\n答案：接受轉診院所應提供轉診安排並設置相關人員與設施，並保留優先名額給轉診病人。應於3日內回復初步診療情形，若住院則於出院後2週內回復病歷摘要。當病情穩定且不需繼續於該院所治療時，應建議轉回原院所或其他適當院所進行後續追蹤，並建立雙向轉診機制。",
+        "問題：轉診注意事項:民眾\n答案：轉診前應與醫師溝通，由醫師協助安排適當院所與科別，並尊重醫師專業建議。應於轉診單有效期限內依指定院所與科別就醫，並向接受轉診院所洽詢就醫安排。轉診治療後，若病情穩定且無需繼續於該院所治療，應依安排轉回原院所或其他適當院所進行後續追蹤。",
+        "問題：轉診注意事項:轉出院所\n答案：對符合醫療需要之保險對象，應由醫師專業判斷開立轉診單，並非依民眾要求。當院所因設備、人力或專長限制無法提供完整診療時，應建議轉診。轉診前應與民眾溝通，協助選擇適當院所與科別，並尊重醫師專業建議。轉診單需包含轉診目的、病歷摘要、院所資訊及有效期限等，且有效期限最長為90日。院所應提供轉診安排並建立雙向轉診機制。"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "doc_id": "referral_005",
+          "chunk_id": "",
+          "source": "referral",
+          "url": "https://www.nhi.gov.tw/ch/dl-55907-edf3d853b6bd40f5b6a3e944f40294df-1.pdf",
+          "question": "轉診注意事項:接受轉診院所",
+          "distance": 0.27642810344696045
+        },
+        {
+          "rank": 2,
+          "doc_id": "referral_006",
+          "chunk_id": "",
+          "source": "referral",
+          "url": "https://www.nhi.gov.tw/ch/dl-55908-aa8a488bd4a2467dba6fceebd550162e-1.pdf",
+          "question": "轉診注意事項:民眾",
+          "distance": 0.2957812547683716
+        },
+        {
+          "rank": 3,
+          "doc_id": "referral_004",
+          "chunk_id": "",
+          "source": "referral",
+          "url": "https://www.nhi.gov.tw/ch/dl-55906-278da61690414bd4a16b83299ff438b7-1.pdf",
+          "question": "轉診注意事項:轉出院所",
+          "distance": 0.30839937925338745
+        }
+      ],
+      "retrieved_tables": [],
+      "route_mode": "vector",
+      "reference": {
+        "doc_id": "referral_005",
+        "source": "referral",
+        "url": "https://www.nhi.gov.tw/ch/dl-55907-edf3d853b6bd40f5b6a3e944f40294df-1.pdf"
+      },
+      "ragas_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8041760904382046,
+        "context_precision": 0.9999999999666667,
+        "context_recall": 1.0,
+        "answer_correctness": 0.83904448595404
+      }
+    }
+  ]
+}

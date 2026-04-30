@@ -170,7 +170,7 @@ def build_generation_record(query_item: dict[str, Any], rag_answer: Any, service
     retrieved_tables: list[dict[str, Any]] = []
     if rag_answer.route_mode == "table":
         table_contexts, retrieved_tables = table_context_records(service, query_item["query"])
-        contexts = table_contexts
+        contexts = table_contexts + contexts
 
     return {
         "qid": query_item["qid"],

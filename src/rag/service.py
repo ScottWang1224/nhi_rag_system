@@ -35,6 +35,22 @@ VECTOR_INSTRUCTIONS = (
     "如果檢索內容沒有足夠資訊支持答案，請直接說明目前資料不足。"
 )
 
+HYBRID_INSTRUCTIONS = (
+    "表格資料是主要依據，文字檢索資料是輔助依據。"
+    "如果問題詢問比例、金額、補助或負擔方式，請優先使用表格資料。"
+    "如果問題詢問定義、資格、流程、時間或規定說明，請優先使用最能直接回答問題的資料。"
+    "不要混合不相關資料；如果表格資料與文字資料衝突或無法互相支持，請說明資料不足或無法確認。"
+)
+
+ANSWER_FORMAT_INSTRUCTIONS = (
+    "請直接輸出適合一般使用者閱讀的回答。"
+    "回答格式固定為「精簡答案」與「補充重點」。"
+    "「精簡答案」請用 1 到 2 句直接回答問題。"
+    "「補充重點」最多列 3 點，且每一點都必須能由提供的資料明確支持。"
+    "不要加入資料中未明確提到的常識、推測、建議或延伸說明。"
+    "如果提供的資料不足以支持補充內容，可以省略「補充重點」或只說明資料不足。"
+)
+
 OUT_OF_SCOPE_MESSAGE = (
     "精簡答案：這個系統目前僅提供台灣全民健康保險相關資訊。\n\n"
     "補充重點：請改問健保制度、保費、投保、補助、給付或就醫規定等問題。"
@@ -191,7 +207,8 @@ class RAGService:
         return self._answer_from_vector(cleaned_query, top_k=top_k, decision=decision)
 
     def _answer_from_table(self, query: str, decision: RouteDecision) -> RAGAnswer:
-        prompt = self._build_table_prompt(query, decision)
+        chunks = self._retriever.search(query, top_k=self._top_k)
+        prompt = self._build_table_prompt(query, decision, chunks)
         response = self._client.responses.create(
             model=self._answer_model,
             input=[
@@ -200,7 +217,7 @@ class RAGService:
                     "content": [
                         {
                             "type": "input_text",
-                            "text": COMMON_INSTRUCTIONS + TABLE_INSTRUCTIONS,
+                            "text": COMMON_INSTRUCTIONS + TABLE_INSTRUCTIONS + HYBRID_INSTRUCTIONS,
                         }
                     ],
                 },
@@ -228,7 +245,7 @@ class RAGService:
         return RAGAnswer(
             query=query,
             answer=response.output_text.strip(),
-            retrieved_chunks=[],
+            retrieved_chunks=chunks,
             references=references,
             route_mode="table",
         )
@@ -271,24 +288,27 @@ class RAGService:
             route_mode=decision.mode if decision else "vector",
         )
 
-    def _build_table_prompt(self, query: str, decision: RouteDecision) -> str:
+    def _build_table_prompt(
+        self,
+        query: str,
+        decision: RouteDecision,
+        chunks: list[RetrievedChunk],
+    ) -> str:
         context_blocks = [self._table_store.format_context(match) for match in decision.table_matches]
         joined_context = "\n\n".join(context_blocks)
+        vector_context = self._format_vector_context(chunks)
         return (
             f"使用者問題：\n{query}\n\n"
             f"路由判斷：{decision.reason}\n\n"
             "可用的表格資料如下：\n"
             f"{joined_context}\n\n"
-            "請直接輸出適合一般使用者閱讀的回答，先給精簡答案，再補充重點。"
+            "可用的文字檢索資料如下：\n"
+            f"{vector_context}\n\n"
+            f"{ANSWER_FORMAT_INSTRUCTIONS}"
         )
 
     @staticmethod
-    def _build_vector_prompt(
-        query: str,
-        chunks: list[RetrievedChunk],
-        *,
-        decision: RouteDecision | None,
-    ) -> str:
+    def _format_vector_context(chunks: list[RetrievedChunk]) -> str:
         context_blocks: list[str] = []
         for chunk in chunks:
             metadata = chunk.metadata
@@ -307,14 +327,23 @@ class RAGService:
                 )
             )
 
-        joined_context = "\n\n".join(context_blocks)
+        return "\n\n".join(context_blocks)
+
+    @staticmethod
+    def _build_vector_prompt(
+        query: str,
+        chunks: list[RetrievedChunk],
+        *,
+        decision: RouteDecision | None,
+    ) -> str:
+        joined_context = RAGService._format_vector_context(chunks)
         routing_line = f"路由判斷：{decision.reason}\n\n" if decision else ""
         return (
             f"使用者問題：\n{query}\n\n"
             f"{routing_line}"
             "檢索到的內容如下：\n"
             f"{joined_context}\n\n"
-            "請直接輸出適合一般使用者閱讀的回答，先給精簡答案，再補充重點。"
+            f"{ANSWER_FORMAT_INSTRUCTIONS}"
         )
 
     @staticmethod
