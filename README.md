@@ -158,6 +158,53 @@ prompt 設計原則為：
 
 這部分目前仍屬於第一版防護，後續仍可再強化，例如加入更完整的事件記錄與異常分析。
 
+## 驗證流程與結果
+
+本專案目前已建立初版驗證流程，分為 retrieval evaluation 與 RAG answer evaluation。
+
+### Retrieval evaluation
+
+Retrieval evaluation 用來驗證檢索器是否能在 Top-K 結果中找回正確來源文件。
+
+相關檔案：
+
+- `scripts/build_eval_queries.py`：從原始 QA 資料抽樣建立評估問題集
+- `eval/run_retrieval_eval.py`：執行 Chroma retrieval 評估
+- `eval/queries.json`：原始 QA 問句評估集
+- `eval/queries_realistic.json`：改寫後的真實使用者問法評估集
+
+目前結果：
+
+| Query set | Total | Hit@1 | Hit@3 | Hit@5 | Hit Rate | MRR |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 原始問句 | 20 | 0.95 | 1.00 | 1.00 | 1.00 | 0.975 |
+| 真實使用者問法 | 20 | 0.95 | 1.00 | 1.00 | 1.00 | 0.975 |
+
+結果顯示，即使將問題改寫為較口語、模糊的使用者查詢，系統仍能在 Top-3 內找回正確文件，表示目前向量檢索層具有一定穩定性。
+
+### RAGAS answer evaluation
+
+RAGAS evaluation 用來評估 RAG 系統在檢索後產生回答的品質。
+相關檔案：
+
+`eval/run_ragas_eval.py`：產生 RAG 回答、保存 contexts，並使用 RAGAS 評分
+`eval/queries_realistic.json`：作為第一版 RAGAS 評估資料集
+
+目前 RAGAS 結果：
+
+| Metric | Score |
+| --- | ---: |
+| Faithfulness | 0.787 |
+| Answer Relevancy | 0.792 |
+| Context Precision | 0.883 |
+| Context Recall | 0.938 |
+| Answer Correctness | 0.646 |
+
+RAGAS 評估顯示，retrieval 雖然穩定，但生成回答仍有改善空間。
+目前 `context_precision`與 `context_recall`表現較好，代表 retrieved context 大多能涵蓋回答所需資訊；`answer_correctness`較低，表示生成回答與標準答案之間仍存在細節落差。
+
+由於本系統同時支援 table route 與 vector route，`run_ragas_eval.py`也會在 table route 時保存 table context，避免 RAGAS 誤判回答沒有依據。
+
 ## API 與前端
 ### 後端
 後端入口為：
@@ -204,23 +251,26 @@ prompt 設計原則為：
 - table / vector 分流
 - 表格型資料的獨立查詢流程
 - 基礎 prompt injection / out-of-scope 防護
+- retrieval evaluation 初版流程
+- RAGAS answer evaluation 初版流程
 
 ## 目前限制
 目前版本仍有幾個明確的限制：
 
 - routing 仍以規則與簡單比對為主
-- retrieval quality 尚未做完整 benchmark 驗證
-- 尚未評估是否需要 rerank
 - table query matching 仍可再加強欄位語意理解
+- RAG 生成回答與標準答案仍存在細節落差
+- 尚未評估是否需要 rerank
 - suspicious query 尚未正式做後端事件記錄
 
 ## 後續規劃
 接下來預計優先處理：
 
-- 建立 retrieval / answer evaluation 流程
+- 擴充 realistic / stress query 評估集
 - 驗證 top-k 與 chunk 策略
 - 評估是否需要加入 reranker
 - 強化 table query matching
+- 分析 RAGAS 低分案例並改善回答生成策略
 - 補上異常 query 與疑似 injection query 的記錄機制
 
 ## 執行方式
