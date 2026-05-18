@@ -256,8 +256,10 @@ http://localhost:8000/eval/results_viewer.html
 
 - 繁體中文介面
 - 使用者 / 助手對話泡泡
-- 回答模擬串流顯示
+- 回答文字以逐句淡入方式呈現，提升閱讀體驗
+- 回答下方提供選擇性的「這則回覆對你有幫助嗎？」使用者回饋按鈕
 - 參考資料超連結
+- 使用者回饋會寫入 runtime query log，供後續品質觀察使用
 
 ## Runtime Query Logging 與人工檢視
 
@@ -285,6 +287,22 @@ http://localhost:8000/eval/results_viewer.html
 
 其中 `human_rating` 與 `human_note` 可用來人工標註回答品質，例如標記為 `good`、`bad` 或 `unsure`，並補充觀察備註。
 
+此外，前端回答完成後會提供選擇性的使用者回饋按鈕：
+
+- 有幫助
+- 沒有幫助
+
+使用者可自由選擇是否回饋，系統不會強制填寫。若使用者點選回饋，前端會透過：
+
+- `PATCH /api/query-logs/{request_id}/feedback`
+
+將該次回答的回饋寫回 `query_logs.jsonl`，並記錄：
+
+- `user_feedback`
+- `user_feedback_at`
+
+這類 user feedback 代表實際使用者對回答是否有幫助的主觀評價，可用來觀察系統在真實使用情境下的產品體驗；而 `human_rating` 與 `human_note` 則保留給後台 reviewer 進一步檢查 routing、retrieval、answer grounding 與資料品質。
+
 ### Query Logs Viewer
 
 本專案提供一個簡易的 query logs viewer：
@@ -301,9 +319,11 @@ http://127.0.0.1:8000/query-logs
 - 瀏覽所有 runtime query logs
 - 搜尋 query、answer 或 request id
 - 依 route mode 篩選
+- 依 `helpful`、`not_helpful` 或 `no feedback` 篩選
 - 依人工標註狀態篩選
 - 查看單筆 query 的 answer、references、retrieved chunks 與 table   matches
-- 手動新增或修改 `human_rating` 與 `human_note`
+- 顯示使用者端 `user_feedback`
+- 查看使用者端 `user_feedback`，並手動新增或修改後台檢視用的 `human_rating` 與 `human_note`
 
 這個功能主要用於觀察系統在真實使用情境下的回答品質，並輔助後續分析 routing、retrieval、prompt 與資料品質是否需要調整。
 
@@ -337,7 +357,8 @@ http://127.0.0.1:8000/query-logs
 - retrieval evaluation 驗證腳本
 - RAGAS answer evaluation 驗證腳本
 - runtime query logging，記錄實際查詢、回答、檢索結果與路由資訊
-- query logs viewer，可瀏覽歷史問答紀錄與檢索來源
+- 使用者端 feedback 收集機制，可記錄回答是否有幫助
+- query logs viewer 支援 user feedback 篩選與後台人工 review
 - 人工標註欄位 `human_rating` / `human_note`，支援後續品質分析
 
 
@@ -346,7 +367,6 @@ http://127.0.0.1:8000/query-logs
 
 - routing 仍以規則與簡單比對為主
 - table query matching 仍可再加強欄位語意理解
-- suspicious query 尚未正式做後端事件記錄
 
 ## 後續規劃
 接下來可優先處理：
@@ -355,8 +375,8 @@ http://127.0.0.1:8000/query-logs
 - 持續觀察 top-k 與 chunk 策略在資料量擴大後的影響
 - 強化 table query matching，改善表格欄位與使用者自然語言之間的對應
 - 針對 RAGAS 低分案例進行分類分析，區分 retrieval、routing、prompt 與 ground truth 精簡造成的誤差
-- 補上異常 query 與疑似 prompt injection query 的後端事件記錄
 - 當資料量擴大或 Top-1 / Top-3 命中率下降時，再評估是否導入 reranker
+- 累積 user feedback 與 human review 後，進一步分析低評分案例，判斷問題來自 routing、retrieval、prompt 或資料內容
 
 ## 執行方式
 ### CLI
