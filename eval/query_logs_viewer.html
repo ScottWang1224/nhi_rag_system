@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Query Logs Viewer</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #111827;
+      --panel-2: #172033;
+      --panel-3: #1f293d;
+      --ink: #eef4ff;
+      --muted: #98a7bd;
+      --line: #2b3750;
+      --accent: #38bdf8;
+      --good: #34d399;
+      --warn: #fbbf24;
+      --bad: #fb7185;
+      --shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 16% 0%, rgba(56, 189, 248, 0.18), transparent 28rem),
+        radial-gradient(circle at 90% 10%, rgba(52, 211, 153, 0.12), transparent 28rem),
+        linear-gradient(180deg, #111827 0%, var(--bg) 48%);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      border-bottom: 1px solid var(--line);
+      background: rgba(11, 16, 32, 0.9);
+      backdrop-filter: blur(14px);
+    }
+
+    .wrap {
+      width: min(1280px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      min-height: 88px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 26px;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    button,
+    select,
+    input,
+    textarea {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(23, 32, 51, 0.96);
+      color: var(--ink);
+      font: inherit;
+    }
+
+    button,
+    select,
+    input {
+      min-height: 38px;
+      padding: 0 12px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 10px 12px;
+      resize: vertical;
+    }
+
+    button {
+      cursor: pointer;
+      font-weight: 650;
+    }
+
+    button.primary {
+      border-color: transparent;
+      background: linear-gradient(135deg, #0ea5e9, #14b8a6);
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(14, 165, 233, 0.18);
+    }
+
+    button:hover,
+    select:hover,
+    input:hover,
+    textarea:hover {
+      border-color: #445674;
+    }
+
+    button:focus-visible,
+    select:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid rgba(56, 189, 248, 0.5);
+      outline-offset: 2px;
+    }
+
+    main {
+      padding: 22px 0 40px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(17, 24, 39, 0.82);
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .stat strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 24px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.35fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(17, 24, 39, 0.86);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(23, 32, 51, 0.72);
+    }
+
+    .panel-head h2 {
+      font-size: 16px;
+    }
+
+    .list {
+      max-height: calc(100vh - 250px);
+      overflow: auto;
+    }
+
+    .log-item {
+      width: 100%;
+      display: block;
+      text-align: left;
+      border: 0;
+      border-bottom: 1px solid rgba(43, 55, 80, 0.74);
+      border-radius: 0;
+      background: transparent;
+      color: var(--ink);
+      padding: 12px 14px;
+    }
+
+    .log-item:hover,
+    .log-item.active {
+      background: rgba(31, 41, 61, 0.9);
+    }
+
+    .item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .query {
+      margin-top: 7px;
+      color: #dbeafe;
+      line-height: 1.45;
+    }
+
+    .meta,
+    .muted {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(31, 41, 61, 0.72);
+      color: #dbeafe;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .badge.good {
+      border-color: rgba(52, 211, 153, 0.42);
+      color: var(--good);
+    }
+
+    .badge.warn {
+      border-color: rgba(251, 191, 36, 0.42);
+      color: var(--warn);
+    }
+
+    .badge.bad {
+      border-color: rgba(251, 113, 133, 0.42);
+      color: var(--bad);
+    }
+
+    .detail {
+      padding: 16px;
+    }
+
+    .section {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section:first-child {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .section h3 {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .answer,
+    pre {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(8, 13, 28, 0.64);
+      padding: 12px;
+      color: #e5edf9;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    pre {
+      max-height: 280px;
+      overflow: auto;
+      font-size: 12px;
+    }
+
+    .kv {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 8px 12px;
+      margin-bottom: 12px;
+    }
+
+    .kv dt {
+      color: var(--muted);
+    }
+
+    .kv dd {
+      margin: 0;
+      word-break: break-word;
+    }
+
+    .review-form {
+      display: grid;
+      gap: 10px;
+    }
+
+    .form-row {
+      display: grid;
+      gap: 6px;
+    }
+
+    .form-row label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .empty {
+      min-height: 340px;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      text-align: center;
+      padding: 24px;
+    }
+
+    .toast {
+      min-height: 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      .topbar,
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 16px 0;
+      }
+
+      .controls {
+        justify-content: flex-start;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .list {
+        max-height: 420px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap topbar">
+      <div>
+        <h1>Query Logs Viewer</h1>
+        <p class="subtitle" id="log-path">Runtime query logs and human review notes</p>
+      </div>
+      <div class="controls">
+        <input id="search" type="search" placeholder="搜尋 query / answer / request id">
+        <select id="route-filter">
+          <option value="">All routes</option>
+          <option value="table">table</option>
+          <option value="vector">vector</option>
+          <option value="blocked">blocked</option>
+          <option value="out_of_scope">out_of_scope</option>
+          <option value="error">error</option>
+        </select>
+        <select id="rating-filter">
+          <option value="">All ratings</option>
+          <option value="unreviewed">unreviewed</option>
+          <option value="good">good</option>
+          <option value="bad">bad</option>
+          <option value="unsure">unsure</option>
+        </select>
+        <button id="refresh" class="primary" type="button">Refresh</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="stats">
+      <div class="stat"><span>Total</span><strong id="stat-total">0</strong></div>
+      <div class="stat"><span>Success</span><strong id="stat-success">0</strong></div>
+      <div class="stat"><span>Reviewed</span><strong id="stat-reviewed">0</strong></div>
+      <div class="stat"><span>Avg Latency</span><strong id="stat-latency">0ms</strong></div>
+    </section>
+
+    <section class="layout">
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Records</h2>
+          <span class="muted" id="visible-count">0 shown</span>
+        </div>
+        <div id="log-list" class="list"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Details</h2>
+          <span class="toast" id="toast"></span>
+        </div>
+        <div id="detail" class="detail empty">No query log selected.</div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const logPath = document.getElementById("log-path");
+    const searchInput = document.getElementById("search");
+    const routeFilter = document.getElementById("route-filter");
+    const ratingFilter = document.getElementById("rating-filter");
+    const refreshButton = document.getElementById("refresh");
+    const list = document.getElementById("log-list");
+    const detail = document.getElementById("detail");
+    const toast = document.getElementById("toast");
+    const visibleCount = document.getElementById("visible-count");
+
+    const statTotal = document.getElementById("stat-total");
+    const statSuccess = document.getElementById("stat-success");
+    const statReviewed = document.getElementById("stat-reviewed");
+    const statLatency = document.getElementById("stat-latency");
+
+    let records = [];
+    let selectedRequestId = "";
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function compact(value, maxLength = 120) {
+      const text = String(value ?? "").replace(/\s+/g, " ").trim();
+      if (text.length <= maxLength) {
+        return text;
+      }
+      return `${text.slice(0, maxLength - 1)}...`;
+    }
+
+    function ratingClass(rating) {
+      if (rating === "good") return "good";
+      if (rating === "bad") return "bad";
+      if (rating === "unsure") return "warn";
+      return "";
+    }
+
+    function updateStats() {
+      const success = records.filter((record) => record.status === "success").length;
+      const reviewed = records.filter((record) => record.human_rating).length;
+      const latencies = records
+        .map((record) => Number(record.latency_ms))
+        .filter((value) => Number.isFinite(value));
+      const avgLatency = latencies.length
+        ? Math.round(latencies.reduce((sum, value) => sum + value, 0) / latencies.length)
+        : 0;
+
+      statTotal.textContent = records.length;
+      statSuccess.textContent = success;
+      statReviewed.textContent = reviewed;
+      statLatency.textContent = `${avgLatency}ms`;
+    }
+
+    function filteredRecords() {
+      const keyword = searchInput.value.trim().toLowerCase();
+      const route = routeFilter.value;
+      const rating = ratingFilter.value;
+
+      return records.filter((record) => {
+        if (route && record.route_mode !== route) {
+          return false;
+        }
+
+        if (rating === "unreviewed" && record.human_rating) {
+          return false;
+        }
+        if (rating && rating !== "unreviewed" && record.human_rating !== rating) {
+          return false;
+        }
+
+        if (!keyword) {
+          return true;
+        }
+
+        const haystack = [
+          record.request_id,
+          record.query,
+          record.answer,
+          record.route_mode,
+          record.route_reason,
+          record.human_rating,
+          record.human_note,
+        ].join(" ").toLowerCase();
+        return haystack.includes(keyword);
+      });
+    }
+
+    function renderList() {
+      const shown = filteredRecords();
+      visibleCount.textContent = `${shown.length} shown`;
+
+      if (!shown.length) {
+        list.innerHTML = `<div class="empty">No matching query logs.</div>`;
+        return;
+      }
+
+      list.innerHTML = shown.map((record) => {
+        const rating = record.human_rating || "unreviewed";
+        const active = record.request_id === selectedRequestId ? " active" : "";
+        return `
+          <button class="log-item${active}" type="button" data-request-id="${escapeHtml(record.request_id)}">
+            <div class="item-row">
+              <span class="badge">${escapeHtml(record.route_mode || "unknown")}</span>
+              <span class="badge ${ratingClass(record.human_rating)}">${escapeHtml(rating)}</span>
+            </div>
+            <div class="query">${escapeHtml(compact(record.query, 150))}</div>
+            <div class="item-row meta">
+              <span>${escapeHtml(record.created_at || "")}</span>
+              <span>${Number(record.latency_ms || 0)}ms</span>
+            </div>
+          </button>
+        `;
+      }).join("");
+
+      for (const item of list.querySelectorAll(".log-item")) {
+        item.addEventListener("click", () => {
+          selectedRequestId = item.dataset.requestId;
+          renderList();
+          renderDetail();
+        });
+      }
+    }
+
+    function renderDetail() {
+      const record = records.find((item) => item.request_id === selectedRequestId);
+      if (!record) {
+        detail.className = "detail empty";
+        detail.textContent = "No query log selected.";
+        return;
+      }
+
+      detail.className = "detail";
+      const retrievedChunks = JSON.stringify(record.retrieved_chunks || [], null, 2);
+      const tableMatches = JSON.stringify(record.table_matches || [], null, 2);
+      const references = JSON.stringify(record.references || [], null, 2);
+
+      detail.innerHTML = `
+        <section class="section">
+          <dl class="kv">
+            <dt>request_id</dt><dd>${escapeHtml(record.request_id)}</dd>
+            <dt>created_at</dt><dd>${escapeHtml(record.created_at)}</dd>
+            <dt>status</dt><dd>${escapeHtml(record.status)}</dd>
+            <dt>route</dt><dd>${escapeHtml(record.route_mode)} / ${escapeHtml(record.route_reason)}</dd>
+            <dt>confidence</dt><dd>${escapeHtml(record.route_confidence ?? "")}</dd>
+            <dt>latency</dt><dd>${Number(record.latency_ms || 0)}ms</dd>
+          </dl>
+        </section>
+
+        <section class="section">
+          <h3>Query</h3>
+          <div class="answer">${escapeHtml(record.query)}</div>
+        </section>
+
+        <section class="section">
+          <h3>Answer</h3>
+          <div class="answer">${escapeHtml(record.answer || record.error || "")}</div>
+        </section>
+
+        <section class="section">
+          <h3>Human Review</h3>
+          <form id="review-form" class="review-form">
+            <div class="form-row">
+              <label for="request-id">Request ID</label>
+              <input id="request-id" name="request_id" value="${escapeHtml(record.request_id)}">
+            </div>
+            <div class="form-row">
+              <label for="human-rating">Human Rating</label>
+              <select id="human-rating" name="human_rating">
+                <option value="" ${!record.human_rating ? "selected" : ""}>unreviewed</option>
+                <option value="good" ${record.human_rating === "good" ? "selected" : ""}>good</option>
+                <option value="bad" ${record.human_rating === "bad" ? "selected" : ""}>bad</option>
+                <option value="unsure" ${record.human_rating === "unsure" ? "selected" : ""}>unsure</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="human-note">Human Note</label>
+              <textarea id="human-note" name="human_note">${escapeHtml(record.human_note || "")}</textarea>
+            </div>
+            <button class="primary" type="submit">Save Review</button>
+          </form>
+        </section>
+
+        <section class="section">
+          <h3>References</h3>
+          <pre>${escapeHtml(references)}</pre>
+        </section>
+
+        <section class="section">
+          <h3>Retrieved Chunks</h3>
+          <pre>${escapeHtml(retrievedChunks)}</pre>
+        </section>
+
+        <section class="section">
+          <h3>Table Matches</h3>
+          <pre>${escapeHtml(tableMatches)}</pre>
+        </section>
+      `;
+
+      document.getElementById("review-form").addEventListener("submit", saveReview);
+    }
+
+    async function saveReview(event) {
+      event.preventDefault();
+      const requestId = document.getElementById("request-id").value.trim();
+      const humanRating = document.getElementById("human-rating").value || null;
+      const humanNote = document.getElementById("human-note").value.trim() || null;
+      if (!requestId) {
+        toast.textContent = "Request ID is required.";
+        return;
+      }
+
+      toast.textContent = "Saving...";
+      const response = await fetch(`/api/query-logs/${encodeURIComponent(requestId)}/review`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          human_rating: humanRating,
+          human_note: humanNote,
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        toast.textContent = data.detail || "Save failed.";
+        return;
+      }
+
+      const index = records.findIndex((record) => record.request_id === data.record.request_id);
+      if (index !== -1) {
+        records[index] = data.record;
+      }
+      selectedRequestId = data.record.request_id;
+      toast.textContent = "Saved.";
+      updateStats();
+      renderList();
+      renderDetail();
+    }
+
+    async function loadLogs() {
+      toast.textContent = "Loading...";
+      const response = await fetch("/api/query-logs");
+      const data = await response.json();
+      if (!response.ok) {
+        toast.textContent = data.detail || "Load failed.";
+        return;
+      }
+
+      records = data.records || [];
+      logPath.textContent = `Loaded ${records.length} runtime query log${records.length === 1 ? "" : "s"}`;
+      if (!records.find((record) => record.request_id === selectedRequestId)) {
+        selectedRequestId = records[0]?.request_id || "";
+      }
+      updateStats();
+      renderList();
+      renderDetail();
+      toast.textContent = "";
+    }
+
+    refreshButton.addEventListener("click", loadLogs);
+    searchInput.addEventListener("input", renderList);
+    routeFilter.addEventListener("change", renderList);
+    ratingFilter.addEventListener("change", renderList);
+
+    loadLogs();
+  </script>
+</body>
+</html>

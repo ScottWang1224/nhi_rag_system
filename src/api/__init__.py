@@ -1,3 +1,3 @@
-from .schemas import ChatRequest, ChatResponse, ReferenceLink
+from .schemas import ChatRequest, ChatResponse, QueryLogReviewUpdate, ReferenceLink
 
-__all__ = ["ChatRequest", "ChatResponse", "ReferenceLink"]
+__all__ = ["ChatRequest", "ChatResponse", "QueryLogReviewUpdate", "ReferenceLink"]

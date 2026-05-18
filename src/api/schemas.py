@@ -16,6 +16,12 @@ class ReferenceLink(BaseModel):
 
 
 class ChatResponse(BaseModel):
+    request_id: str
     query: str
     answer: str
     references: list[ReferenceLink] = Field(default_factory=list)
+
+
+class QueryLogReviewUpdate(BaseModel):
+    human_rating: str | None = Field(default=None, max_length=32)
+    human_note: str | None = Field(default=None, max_length=2000)

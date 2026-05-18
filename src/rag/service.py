@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 from openai import OpenAI
 
 from rag.router import QueryRouter, RouteDecision
-from tablestores import TableStore
+from tablestores import TableMatch, TableStore
 from vectorstores import ChromaRetriever, RetrievedChunk
 
 COMMON_INSTRUCTIONS = (
@@ -159,6 +159,9 @@ class RAGAnswer:
     retrieved_chunks: list[RetrievedChunk]
     references: list[AnswerReference] = field(default_factory=list)
     route_mode: str = "vector"
+    route_reason: str = ""
+    route_confidence: float | None = None
+    table_matches: list[TableMatch] = field(default_factory=list)
 
 
 class RAGService:
@@ -189,6 +192,8 @@ class RAGService:
                 retrieved_chunks=[],
                 references=[],
                 route_mode="blocked",
+                route_reason="suspicious query pattern",
+                route_confidence=1.0,
             )
 
         if self._is_out_of_scope_query(cleaned_query):
@@ -198,6 +203,8 @@ class RAGService:
                 retrieved_chunks=[],
                 references=[],
                 route_mode="out_of_scope",
+                route_reason="non-domain query without NHI keywords",
+                route_confidence=1.0,
             )
 
         decision = self._router.route(cleaned_query)
@@ -248,6 +255,9 @@ class RAGService:
             retrieved_chunks=chunks,
             references=references,
             route_mode="table",
+            route_reason=decision.reason,
+            route_confidence=decision.confidence,
+            table_matches=decision.table_matches,
         )
 
     def _answer_from_vector(
@@ -286,6 +296,9 @@ class RAGService:
             retrieved_chunks=chunks,
             references=self._references_from_chunks(chunks),
             route_mode=decision.mode if decision else "vector",
+            route_reason=decision.reason if decision else "",
+            route_confidence=decision.confidence if decision else None,
+            table_matches=decision.table_matches if decision else [],
         )
 
     def _build_table_prompt(
