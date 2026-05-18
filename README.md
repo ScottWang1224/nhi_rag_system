@@ -259,6 +259,54 @@ http://localhost:8000/eval/results_viewer.html
 - 回答模擬串流顯示
 - 參考資料超連結
 
+## Runtime Query Logging 與人工檢視
+
+除了離線的 retrieval evaluation 與 RAGAS evaluation，本專案也加入 runtime query logging，用來記錄系統實際被使用時的查詢、檢索與回答結果，方便後續人工檢視與品質分析。
+
+每次使用者透過前端或 API 送出問題時，後端會將該次請求寫入：
+
+- `data/logs/query_logs.jsonl`
+
+每筆紀錄包含：
+
+- `request_id`
+- `created_at`
+- 使用者 query
+- route mode，例如 `table`、`vector`、`blocked`、`out_of_scope`
+- route reason 與 confidence
+- 生成回答
+- retrieved chunks
+- table matches
+- references
+- latency
+- status / error
+- human_rating
+- human_note
+
+其中 `human_rating` 與 `human_note` 可用來人工標註回答品質，例如標記為 `good`、`bad` 或 `unsure`，並補充觀察備註。
+
+### Query Logs Viewer
+
+本專案提供一個簡易的 query logs viewer：
+
+- `eval/query_logs_viewer.html`
+
+啟動 FastAPI 後可開啟：
+```text
+http://127.0.0.1:8000/query-logs
+```
+
+此頁面支援：
+
+- 瀏覽所有 runtime query logs
+- 搜尋 query、answer 或 request id
+- 依 route mode 篩選
+- 依人工標註狀態篩選
+- 查看單筆 query 的 answer、references、retrieved chunks 與 table   matches
+- 手動新增或修改 `human_rating` 與 `human_note`
+
+這個功能主要用於觀察系統在真實使用情境下的回答品質，並輔助後續分析 routing、retrieval、prompt 與資料品質是否需要調整。
+
 ## 主要檔案結構
 - `main.py`：CLI 入口
 - `api_main.py`：FastAPI 入口
@@ -270,6 +318,9 @@ http://localhost:8000/eval/results_viewer.html
 - `data/table/table.json`：表格型資料
 - `scripts/index_chroma.py`：Chroma 建索引腳本
 - `eval/results_viewer.html`：retrieval / RAGAS 評估結果視覺化檢視頁
+- `data/logs/query_logs.jsonl`：runtime query log 紀錄檔
+- `eval/query_logs_viewer.html`：query log 與人工標註檢視頁
+- `src/api/query_logs.py`：query log 讀寫與人工標註更新邏輯
 
 ## 目前完成項目
 目前已完成：
@@ -285,6 +336,10 @@ http://localhost:8000/eval/results_viewer.html
 - 基礎 prompt injection / out-of-scope 防護
 - retrieval evaluation 驗證腳本
 - RAGAS answer evaluation 驗證腳本
+- runtime query logging，記錄實際查詢、回答、檢索結果與路由資訊
+- query logs viewer，可瀏覽歷史問答紀錄與檢索來源
+- 人工標註欄位 `human_rating` / `human_note`，支援後續品質分析
+
 
 ## 目前限制
 目前版本仍有幾個明確的限制：
