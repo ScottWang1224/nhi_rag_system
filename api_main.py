@@ -21,7 +21,13 @@ QUERY_LOGS_PATH = PROJECT_ROOT / "data" / "logs" / "query_logs.jsonl"
 if str(SRC_PATH) not in sys.path:
     sys.path.insert(0, str(SRC_PATH))
 
-from api import ChatRequest, ChatResponse, QueryLogReviewUpdate, ReferenceLink
+from api import (
+    ChatRequest,
+    ChatResponse,
+    QueryLogFeedbackUpdate,
+    QueryLogReviewUpdate,
+    ReferenceLink,
+)
 from api.query_logs import QueryLogStore
 from rag import AppConfig, RAGService, build_service
 
@@ -145,6 +151,8 @@ def _build_success_log_record(
         "latency_ms": latency_ms,
         "status": "success",
         "error": None,
+        "user_feedback": None,
+        "user_feedback_at": None,
         "human_rating": None,
         "human_note": None,
     }
@@ -173,6 +181,8 @@ def _build_error_log_record(
         "latency_ms": latency_ms,
         "status": "error",
         "error": error,
+        "user_feedback": None,
+        "user_feedback_at": None,
         "human_rating": None,
         "human_note": None,
     }
@@ -233,6 +243,23 @@ async def update_query_log_review(
         request_id,
         human_rating=payload.human_rating,
         human_note=payload.human_note,
+    )
+    if updated is None:
+        raise HTTPException(status_code=404, detail="Query log record not found.")
+    return {"record": updated}
+
+
+@app.patch("/api/query-logs/{request_id}/feedback")
+async def update_query_log_feedback(
+    request_id: str,
+    payload: QueryLogFeedbackUpdate,
+    request: Request,
+) -> dict:
+    log_store: QueryLogStore = request.app.state.query_log_store
+    updated = log_store.update_feedback(
+        request_id,
+        user_feedback=payload.user_feedback,
+        user_feedback_at=_now_taipei_iso(),
     )
     if updated is None:
         raise HTTPException(status_code=404, detail="Query log record not found.")

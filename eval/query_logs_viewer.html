@@ -142,7 +142,7 @@
 
     .stats {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 12px;
       margin-bottom: 16px;
     }
@@ -399,6 +399,12 @@
           <option value="bad">bad</option>
           <option value="unsure">unsure</option>
         </select>
+        <select id="feedback-filter">
+          <option value="">All feedback</option>
+          <option value="no_feedback">no feedback</option>
+          <option value="helpful">helpful</option>
+          <option value="not_helpful">not helpful</option>
+        </select>
         <button id="refresh" class="primary" type="button">Refresh</button>
       </div>
     </div>
@@ -408,6 +414,7 @@
     <section class="stats">
       <div class="stat"><span>Total</span><strong id="stat-total">0</strong></div>
       <div class="stat"><span>Success</span><strong id="stat-success">0</strong></div>
+      <div class="stat"><span>User Feedback</span><strong id="stat-feedback">0</strong></div>
       <div class="stat"><span>Reviewed</span><strong id="stat-reviewed">0</strong></div>
       <div class="stat"><span>Avg Latency</span><strong id="stat-latency">0ms</strong></div>
     </section>
@@ -436,6 +443,7 @@
     const searchInput = document.getElementById("search");
     const routeFilter = document.getElementById("route-filter");
     const ratingFilter = document.getElementById("rating-filter");
+    const feedbackFilter = document.getElementById("feedback-filter");
     const refreshButton = document.getElementById("refresh");
     const list = document.getElementById("log-list");
     const detail = document.getElementById("detail");
@@ -444,6 +452,7 @@
 
     const statTotal = document.getElementById("stat-total");
     const statSuccess = document.getElementById("stat-success");
+    const statFeedback = document.getElementById("stat-feedback");
     const statReviewed = document.getElementById("stat-reviewed");
     const statLatency = document.getElementById("stat-latency");
 
@@ -474,8 +483,21 @@
       return "";
     }
 
+    function feedbackLabel(feedback) {
+      if (feedback === "helpful") return "helpful";
+      if (feedback === "not_helpful") return "not helpful";
+      return "no feedback";
+    }
+
+    function feedbackClass(feedback) {
+      if (feedback === "helpful") return "good";
+      if (feedback === "not_helpful") return "bad";
+      return "";
+    }
+
     function updateStats() {
       const success = records.filter((record) => record.status === "success").length;
+      const feedbackCount = records.filter((record) => record.user_feedback).length;
       const reviewed = records.filter((record) => record.human_rating).length;
       const latencies = records
         .map((record) => Number(record.latency_ms))
@@ -486,6 +508,7 @@
 
       statTotal.textContent = records.length;
       statSuccess.textContent = success;
+      statFeedback.textContent = feedbackCount;
       statReviewed.textContent = reviewed;
       statLatency.textContent = `${avgLatency}ms`;
     }
@@ -494,6 +517,7 @@
       const keyword = searchInput.value.trim().toLowerCase();
       const route = routeFilter.value;
       const rating = ratingFilter.value;
+      const feedback = feedbackFilter.value;
 
       return records.filter((record) => {
         if (route && record.route_mode !== route) {
@@ -507,6 +531,13 @@
           return false;
         }
 
+        if (feedback === "no_feedback" && record.user_feedback) {
+          return false;
+        }
+        if (feedback && feedback !== "no_feedback" && record.user_feedback !== feedback) {
+          return false;
+        }
+
         if (!keyword) {
           return true;
         }
@@ -517,6 +548,7 @@
           record.answer,
           record.route_mode,
           record.route_reason,
+          record.user_feedback,
           record.human_rating,
           record.human_note,
         ].join(" ").toLowerCase();
@@ -535,17 +567,18 @@
 
       list.innerHTML = shown.map((record) => {
         const rating = record.human_rating || "unreviewed";
+        const feedback = feedbackLabel(record.user_feedback);
         const active = record.request_id === selectedRequestId ? " active" : "";
         return `
           <button class="log-item${active}" type="button" data-request-id="${escapeHtml(record.request_id)}">
             <div class="item-row">
               <span class="badge">${escapeHtml(record.route_mode || "unknown")}</span>
-              <span class="badge ${ratingClass(record.human_rating)}">${escapeHtml(rating)}</span>
+              <span class="badge ${feedbackClass(record.user_feedback)}">${escapeHtml(feedback)}</span>
             </div>
             <div class="query">${escapeHtml(compact(record.query, 150))}</div>
             <div class="item-row meta">
               <span>${escapeHtml(record.created_at || "")}</span>
-              <span>${Number(record.latency_ms || 0)}ms</span>
+              <span>${escapeHtml(rating)} / ${Number(record.latency_ms || 0)}ms</span>
             </div>
           </button>
         `;
@@ -593,6 +626,14 @@
         <section class="section">
           <h3>Answer</h3>
           <div class="answer">${escapeHtml(record.answer || record.error || "")}</div>
+        </section>
+
+        <section class="section">
+          <h3>User Feedback</h3>
+          <dl class="kv">
+            <dt>feedback</dt><dd>${escapeHtml(feedbackLabel(record.user_feedback))}</dd>
+            <dt>submitted_at</dt><dd>${escapeHtml(record.user_feedback_at || "")}</dd>
+          </dl>
         </section>
 
         <section class="section">
@@ -699,6 +740,7 @@
     searchInput.addEventListener("input", renderList);
     routeFilter.addEventListener("change", renderList);
     ratingFilter.addEventListener("change", renderList);
+    feedbackFilter.addEventListener("change", renderList);
 
     loadLogs();
   </script>

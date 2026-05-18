@@ -160,6 +160,54 @@ body {
   text-decoration: underline;
 }
 
+.feedback {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e4ece7;
+}
+
+.feedback-prompt,
+.feedback-status {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.feedback-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.feedback-actions button {
+  min-width: 0;
+  padding: 7px 12px;
+  border: 1px solid #cfe1d8;
+  border-radius: 999px;
+  background: #f8fcfa;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 650;
+  box-shadow: none;
+}
+
+.feedback-actions button:hover {
+  border-color: var(--accent);
+  background: #eefaf3;
+}
+
+.feedback-actions button.selected {
+  border-color: var(--accent);
+  background: #e1f8e9;
+  color: #087a37;
+}
+
+.feedback-status {
+  min-height: 20px;
+  margin-top: 7px;
+}
+
 .status {
   min-height: 24px;
   padding: 0 4px;
@@ -260,6 +308,10 @@ button:disabled {
 
   button {
     width: 100%;
+  }
+
+  .feedback-actions button {
+    width: auto;
   }
 
   .bubble {

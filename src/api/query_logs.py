@@ -75,3 +75,34 @@ class QueryLogStore:
         temp_path.replace(self._path)
 
         return updated_record
+
+    def update_feedback(
+        self,
+        request_id: str,
+        *,
+        user_feedback: str,
+        user_feedback_at: str,
+    ) -> dict[str, Any] | None:
+        records = self.list_records()
+        updated_record: dict[str, Any] | None = None
+
+        for record in records:
+            if record.get("request_id") != request_id:
+                continue
+            record["user_feedback"] = user_feedback
+            record["user_feedback_at"] = user_feedback_at
+            updated_record = record
+            break
+
+        if updated_record is None:
+            return None
+
+        self._path.parent.mkdir(parents=True, exist_ok=True)
+        temp_path = self._path.with_suffix(self._path.suffix + ".tmp")
+        with temp_path.open("w", encoding="utf-8") as file:
+            for record in records:
+                json.dump(record, file, ensure_ascii=False)
+                file.write("\n")
+        temp_path.replace(self._path)
+
+        return updated_record

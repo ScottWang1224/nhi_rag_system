@@ -25,3 +25,7 @@ class ChatResponse(BaseModel):
 class QueryLogReviewUpdate(BaseModel):
     human_rating: str | None = Field(default=None, max_length=32)
     human_note: str | None = Field(default=None, max_length=2000)
+
+
+class QueryLogFeedbackUpdate(BaseModel):
+    user_feedback: str = Field(..., pattern="^(helpful|not_helpful)$")
