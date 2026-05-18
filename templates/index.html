@@ -9,7 +9,9 @@
   <body>
     <main class="chat-shell">
       <header class="chat-header">
-        <div class="avatar">健</div>
+        <div class="avatar" aria-hidden="true">
+          <span class="avatar-mark"></span>
+        </div>
         <div>
           <h1>健保問答助手</h1>
           <p>用聊天方式查詢健保資訊，系統會回覆答案與參考資料連結。</p>
@@ -19,8 +21,8 @@
       <section id="chat-room" class="chat-room" aria-live="polite">
         <article class="message message-assistant">
           <div class="message-meta">健保問答助手</div>
-          <div class="bubble">
-            你好，請輸入你想詢問的健保相關問題。
+          <div class="bubble bubble-welcome">
+            歡迎使用健保問答助手!請問需要什麼樣的協助
           </div>
         </article>
       </section>
@@ -32,7 +34,7 @@
         <textarea
           id="query"
           name="query"
-          placeholder="請輸入你的問題，例如：員工眷屬人數太多保費負擔會太大嗎？"
+          placeholder="請輸入你的問題，例如：健保卡不見了能去哪裡辦？"
           rows="2"
         ></textarea>
         <button id="submit" type="submit">送出</button>

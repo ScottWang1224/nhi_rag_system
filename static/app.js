@@ -116,32 +116,38 @@ function createAssistantMessage(sender) {
   return bubble;
 }
 
-function splitIntoChunks(text) {
-  const normalized = String(text).replace(/\r\n/g, "\n");
-  const rawParts =
-    normalized.match(/[^。\uFF01\uFF1F\n]+[。\uFF01\uFF1F]?|[^\S\n]*\n/g) || [normalized];
-  const chunks = [];
-
-  for (const part of rawParts) {
-    if (!part) {
-      continue;
-    }
-
-    if (part.includes("\n")) {
-      chunks.push(part);
-      continue;
-    }
-
-    if (part.length <= 24) {
-      chunks.push(part);
-      continue;
-    }
-
-    const segments = part.match(/.{1,24}/g) || [part];
-    chunks.push(...segments);
+function splitIntoDisplaySegments(text) {
+  const normalized = String(text).replace(/\r\n/g, "\n").trim();
+  if (!normalized) {
+    return [];
   }
 
-  return chunks;
+  const segments = [];
+  const blocks = normalized.split(/\n{2,}/);
+
+  for (const block of blocks) {
+    const lines = block.split("\n").filter((line) => line.trim());
+
+    if (lines.length > 1) {
+      for (const line of lines) {
+        segments.push(line.trim());
+      }
+      continue;
+    }
+
+    const line = block.trim();
+    const sentenceParts =
+      line.match(/[^。！？!?；;]+[。！？!?；;]?/g) || [line];
+
+    for (const part of sentenceParts) {
+      const segment = part.trim();
+      if (segment) {
+        segments.push(segment);
+      }
+    }
+  }
+
+  return segments;
 }
 
 function sleep(ms) {
@@ -234,11 +240,11 @@ function appendFeedbackControls({ bubble, requestId }) {
 
 async function typeAssistantMessage({ sender, text, references = [], requestId = "" }) {
   const bubble = createAssistantMessage(sender);
-  const chunks = splitIntoChunks(normalizeAnswerText(text));
+  const chunks = splitIntoDisplaySegments(normalizeAnswerText(text));
 
   for (const chunk of chunks) {
-    const chunkNode = document.createElement("span");
-    chunkNode.className = "stream-chunk";
+    const chunkNode = document.createElement("p");
+    chunkNode.className = "stream-segment";
     chunkNode.textContent = chunk;
     bubble.appendChild(chunkNode);
     scrollToBottom();
