@@ -4,10 +4,17 @@
 
 目前系統包含：
 
-- CLI 測試入口
-- FastAPI 後端 API
-- 簡易聊天式前端
-- table / vector 雙路徑查詢流程
+- CLI 與 FastAPI API
+- 聊天式前端，支援參考資料、回答動畫與使用者回饋
+- table / vector 雙路徑 RAG 查詢流程
+- Chroma 向量檢索與結構化表格查詢
+- prompt injection / out-of-scope 基礎防護
+- runtime query logging 與後台 human review viewer
+- retrieval evaluation、RAGAS evaluation 與結果檢視工具
+
+## Demo
+
+![Chat Demo](docs/imgs/chat_demo.GIF)
 
 ## 專案說明
 健保資料同時包含敘述型文字與表格型資訊。若所有資料都以同一種方式處理，檢索效果通常不夠穩定。
@@ -20,6 +27,9 @@
 目前的系統設計是先判斷 query 的性質，再決定要查表還是走向量檢索。
 
 ## 系統流程
+
+![System Architecture](docs/imgs/overview.png)
+
 整體流程如下：
 
 1. 使用者從 CLI 或前端送出 query
@@ -220,6 +230,7 @@ RAGAS 評估顯示，retrieval 階段已具備穩定表現。原始問句與模�
 ### 評估結果檢視工具
 
 為了方便比較不同版本的 retrieval / RAGAS 評估結果，本專案提供一個簡易的靜態檢視頁：
+![Evaluation Results Viewer](docs/imgs/eval_results_viewer.png)
 
 - `eval/results_viewer.html`
 
@@ -307,6 +318,8 @@ http://localhost:8000/eval/results_viewer.html
 
 本專案提供一個簡易的 query logs viewer：
 
+![Query Logs Viewer](docs/imgs/query_logs_viewer.png)
+
 - `eval/query_logs_viewer.html`
 
 啟動 FastAPI 後可開啟：
@@ -367,6 +380,7 @@ http://127.0.0.1:8000/query-logs
 
 - routing 仍以規則與簡單比對為主
 - table query matching 仍可再加強欄位語意理解
+- 回答延遲仍偏高，主要原因是 query embedding 與 answer generation 皆需呼叫外部 OpenAI API；後續可透過 prompt 長度控制、top-k 調整、常見查詢快取、替換更快模型，或評估本地模型部署來改善體感速度
 
 ## 後續規劃
 接下來可優先處理：
@@ -377,8 +391,25 @@ http://127.0.0.1:8000/query-logs
 - 針對 RAGAS 低分案例進行分類分析，區分 retrieval、routing、prompt 與 ground truth 精簡造成的誤差
 - 當資料量擴大或 Top-1 / Top-3 命中率下降時，再評估是否導入 reranker
 - 累積 user feedback 與 human review 後，進一步分析低評分案例，判斷問題來自 routing、retrieval、prompt 或資料內容
+- 評估改用更快模型或本地模型部署，並將 embedding provider 與 answer generation provider 進一步抽象化，降低對單一 LLM API provider 的耦合
 
 ## 執行方式
+
+執行前請先建立 `.env`，可參考 `.env.example`：
+
+Windows PowerShell：
+
+```powershell
+Copy-Item .env.example .env
+```
+macOS / Linux：
+
+```bash
+cp .env.example .env
+```
+
+接著在 `.env` 中填入自己的 `OPENAI_API_KEY`。
+
 ### CLI
 ```powershell
 uv run python main.py
