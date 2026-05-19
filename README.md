@@ -28,7 +28,17 @@
 
 ## 系統流程
 
-![System Architecture](docs/imgs/overview.png)
+### 概念圖
+
+![RAG Workflow Overview](docs/imgs/rag_workflow_overview.png)
+
+概念圖呈現使用者提問、資料檢索、回答生成、使用者回饋與後台檢視之間的整體流程。
+
+### 技術架構
+
+![Technical System Flow](docs/imgs/technical_system_flow.png)
+
+技術架構圖呈現 FastAPI、RAGService、QueryRouter、TableStore、ChromaRetriever、OpenAI API 與 query log viewer 之間的模組關係。
 
 整體流程如下：
 
