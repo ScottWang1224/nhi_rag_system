@@ -1,7 +1,7 @@
 [project]
 name = "nhi-rag-system"
 version = "0.1.0"
-description = "Add your description here"
+description = "Taiwan NHI RAG Q&A system with hybrid table/vector retrieval, runtime logging, and evaluation tools."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [

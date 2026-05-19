@@ -144,6 +144,12 @@ ENV/
 env.bak/
 venv.bak/
 
+# Local runtime artifacts
+data/vectordb/chroma/
+data/logs/*.jsonl
+!data/logs/query_logs.example.jsonl
+!data/logs/.gitkeep
+
 # Spyder project settings
 .spyderproject
 .spyproject

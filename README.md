@@ -420,6 +420,14 @@ cp .env.example .env
 
 接著在 `.env` 中填入自己的 `OPENAI_API_KEY`。
 
+### 建立 Chroma 向量資料庫
+
+若 `data/vectordb/chroma/` 不存在，請先執行 indexing：
+
+```powershell
+uv run python scripts/index_chroma.py
+```
+
 ### CLI
 ```powershell
 uv run python main.py
